@@ -1,4 +1,10 @@
-Domain\Kweet.class
+Dao\DaoFacade.class
+Dao\JPA.class
 Domain\User.class
+Rest\KwetterRestApplication.class
 Domain\Kweet_.class
+Domain\Kweet.class
+Dao\KwetterDAO.class
+Service\KwetterService.class
+Dao\KwetterDaoJPA.class
 Domain\User_.class

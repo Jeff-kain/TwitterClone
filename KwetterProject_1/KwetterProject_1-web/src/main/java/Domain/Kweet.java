@@ -20,7 +20,7 @@ public class Kweet implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Long getId() {
@@ -53,7 +53,7 @@ public class Kweet implements Serializable {
 
     @Override
     public String toString() {
-        return "KwetterProject.Kweet[ id=" + id + " ]";
+        return "Domain.Kweet[ id=" + id + " ]";
     }
     
 }

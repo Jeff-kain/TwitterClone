@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
  *
  * @author jeffrey
  */
-@Path("/Kwetter-api")
+@Path("/kwetter-api")
 public class KwetterService {
 
     @Inject
@@ -39,7 +39,7 @@ public class KwetterService {
     }
 
     public void followUser(User follower, User followee) {
-        //follower.addFollow(followee);
+        // follower.addFollow(followee);
         kwetterDAO.updateUser(follower);
     }
 
@@ -48,7 +48,7 @@ public class KwetterService {
     }
 
     public void unfollowUser(User follower, User followee) {
-        //follower.removeFollow(followee);
+       // follower.removeFollow(followee);
         kwetterDAO.updateUser(follower);
     }
 
@@ -57,8 +57,9 @@ public class KwetterService {
     }
 
     @GET
+    @Path("/testrest")
     @Produces("text/html")
     public String getHthml() {
-        return "<html lang=\"en\"><body><h1>Hello, World!!</body></h1></html>";
+        return "<html lang=\"en\"><body><h1>Hello, World!! Greetings from Kwetter Api</body></h1></html>";
     }
 }
