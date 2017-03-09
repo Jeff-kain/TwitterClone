@@ -6,10 +6,9 @@
 package Domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -20,8 +19,24 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    // @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String userName;
+    private String url;
+//    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
+//    private List<User> following;
+    @OneToMany
+    private List<Kweet> kweets;
+    
+    @ManyToOne 
+    private User parent;
+    @OneToMany(mappedBy="parent")
+    private Collection<User> following;
+
+    public User(String userName, String url) {
+        this.userName = userName;
+        this.url = url;
+    }
 
     public Long getId() {
         return id;
@@ -29,6 +44,42 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Collection<User> getFollowing() {
+        return following;
+    }
+
+    public void addFollow(User follow) {
+        this.following.add(follow);
+    }
+
+    public void removeFollow(User follow) {
+        this.following.remove(follow);
+    }
+
+    public void addKweet(Kweet kweet) {
+        this.kweets.add(kweet);
+    }
+
+    public List<Kweet> getKweets() {
+        return kweets;
     }
 
     @Override
@@ -55,5 +106,5 @@ public class User implements Serializable {
     public String toString() {
         return "Domain.User[ id=" + id + " ]";
     }
-    
+
 }

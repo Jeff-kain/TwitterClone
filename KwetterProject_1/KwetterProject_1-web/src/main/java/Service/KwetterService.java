@@ -10,6 +10,7 @@ import Domain.Kweet;
 import Domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,7 +20,7 @@ import javax.ws.rs.Produces;
  *
  * @author jeffrey
  */
-@Path("/kwetter-api")
+@Stateless
 public class KwetterService {
 
     @Inject
@@ -39,7 +40,7 @@ public class KwetterService {
     }
 
     public void followUser(User follower, User followee) {
-        // follower.addFollow(followee);
+        follower.addFollow(followee);
         kwetterDAO.updateUser(follower);
     }
 
@@ -48,18 +49,11 @@ public class KwetterService {
     }
 
     public void unfollowUser(User follower, User followee) {
-       // follower.removeFollow(followee);
+        follower.removeFollow(followee);
         kwetterDAO.updateUser(follower);
     }
 
     public void createKweet(Kweet kweet) {
         kwetterDAO.createKweet(kweet);
-    }
-
-    @GET
-    @Path("/testrest")
-    @Produces("text/html")
-    public String getHthml() {
-        return "<html lang=\"en\"><body><h1>Hello, World!! Greetings from Kwetter Api</body></h1></html>";
     }
 }
