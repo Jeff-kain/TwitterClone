@@ -6,6 +6,7 @@
 package Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
@@ -25,13 +26,20 @@ public class User implements Serializable {
     private String url;
 //    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
 //    private List<User> following;
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Kweet> kweets;
-    
-    @ManyToOne 
+
+    @JoinTable(name = "followers", joinColumns = {
+        @JoinColumn(name = "followers")
+    }, inverseJoinColumns = {
+        @JoinColumn(name = "following")
+    })
+    @ManyToMany
+    private List<User> following = new ArrayList();
+    @ManyToOne
     private User parent;
-    @OneToMany(mappedBy="parent")
-    private Collection<User> following;
+    @ManyToMany(mappedBy = "following")
+    private List<User> followers;
 
     public User(String userName, String url) {
         this.userName = userName;
@@ -62,8 +70,12 @@ public class User implements Serializable {
         this.url = url;
     }
 
-    public Collection<User> getFollowing() {
+    public List<User> getFollowing() {
         return following;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
     }
 
     public void addFollow(User follow) {

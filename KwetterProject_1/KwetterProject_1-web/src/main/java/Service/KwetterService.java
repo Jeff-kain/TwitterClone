@@ -44,8 +44,25 @@ public class KwetterService {
         kwetterDAO.updateUser(follower);
     }
 
+    public User find(String username) {
+        return kwetterDAO.find(username);
+    }
+
     public List<User> getFollowers(User user) {
         return kwetterDAO.getFollowers(user);
+    }
+
+    public List<User> getFollowing(User user) {
+        return kwetterDAO.getFollowing(user);
+    }
+
+    public List<User> findAll() {
+        List<User> allUsers = kwetterDAO.findAllUsers();
+        return allUsers;
+    }
+
+    public List<Kweet> findAllTweets() {
+        return kwetterDAO.findAllKweets();
     }
 
     public void unfollowUser(User follower, User followee) {

@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,7 +27,10 @@ public class Kweet implements Serializable {
     private Long id;
     private String content;
     private Date postDate;
-    private User owner;
+    
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user;
     
     public Kweet () {
         
@@ -33,7 +38,7 @@ public class Kweet implements Serializable {
     
     public Kweet (String content, User owner) {
         this.content = content;
-        this.owner = owner;
+        this.user = owner;
         this.postDate = new Date();
     }
     public Long getId() {
@@ -57,7 +62,7 @@ public class Kweet implements Serializable {
     }
 
     public User getOwner() {
-        return owner;
+        return user;
     }
 
     @Override

@@ -28,5 +28,18 @@ public interface KwetterDAO {
     //maybe split here?
     public void createKweet(Kweet kweet);
 
+    public boolean removeFollowing(User invokingUser, User targetUser);
+
+    public boolean addFollowing(User invokingUser, User targetedUser);
+
     public List<Kweet> getKweetsByUser(User user);
+
+    public User find(String username);
+
+
+    public List<User> getFollowing(User user);
+
+    public List<User> findAllUsers();
+
+    public List<Kweet> findAllKweets();
 }
