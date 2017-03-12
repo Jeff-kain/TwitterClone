@@ -13,11 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author jeffrey
  */
+@NamedQueries({
+    @NamedQuery(name = "Kweet.findAll", query = "SELECT k FROM Kweet k"),
+    @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT k FROM Kweet k,"
+            + " User u WHERE user_id IN (SELECT id FROM User u "
+            + "WHERE userName = :userName)"),
+})
 @Entity
 public class Kweet implements Serializable {
 
@@ -35,7 +43,7 @@ public class Kweet implements Serializable {
     public Kweet () {
         
     }
-    
+  
     public Kweet (String content, User owner) {
         this.content = content;
         this.user = owner;

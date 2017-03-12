@@ -8,6 +8,7 @@ package Dao;
 import Domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,9 +56,11 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
 
     @Override
     public User find(String username) {
-        User u = em.createNamedQuery("User.findByUsername", User.class)
-                .setParameter("username", username).getSingleResult();
-        return u;
+//        User u = em.createNamedQuery("User.findByUsername", User.class)
+//                .setParameter("username", username).getSingleResult();
+//        return u;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
@@ -69,10 +72,10 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
 
     @Override
     public List<User> findAllUsers() {
-        @SuppressWarnings("unchecked")
-        final List<User> results = em.createQuery("select * from User u")
+        // @SuppressWarnings("unchecked")
+        return em.createNamedQuery("User.findAllUsers", User.class)
                 .getResultList();
-        return results;
+//        return results;
     }
 
     @Override
