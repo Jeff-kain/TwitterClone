@@ -74,8 +74,12 @@ public class KwetterService {
         return allUsers;
     }
 
-    public List findAllKweets() {
+    public List<Kweet> findAllKweets() {
         return kwetterDAO.findAllKweets();
+    }
+    
+    public List findRecentKweets(String userName) {
+        return kwetterDAO.findRecentKweets(userName);
     }
 
     public List<Kweet> findKweetsByUser(String userName) {

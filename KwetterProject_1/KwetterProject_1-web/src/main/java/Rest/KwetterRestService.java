@@ -8,6 +8,8 @@ package Rest;
 import Domain.Kweet;
 import Domain.User;
 import Service.KwetterService;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -35,8 +37,7 @@ public class KwetterRestService {
     @Path("/getAllUsers")
     @Produces({APPLICATION_JSON, APPLICATION_XML})
     public Response getAllUsers() {
-        final List users = kwetterService.findAll();
-
+        List users = kwetterService.findAll();
         return Response.ok(users).build();
     }
 
@@ -44,9 +45,29 @@ public class KwetterRestService {
     @Path("/getAllKweets")
     @Produces({APPLICATION_JSON, APPLICATION_XML})
     public Response getAllKweets() {
-        final List Kweets = kwetterService.findAllKweets();
-
+        List<Kweet> Kweets = kwetterService.findAllKweets();
         return Response.ok(Kweets).build();
+    }
+
+    @GET
+    @Path("/getRecentKweets/{userName}")
+    @Produces({APPLICATION_JSON, APPLICATION_XML})
+    public Response getRecentKweets(@PathParam("userName") String userName) {
+        List Kweets = kwetterService.findRecentKweets(userName);
+        return Response.ok(Kweets).build();
+    }
+
+    @GET
+    @Path("/getList")
+    @Produces({APPLICATION_JSON, APPLICATION_XML})
+    public Response getList() {
+        Collection<String> strings;
+        strings = new ArrayList<String>();
+        String t = "test1";
+        String a = "test2";
+        strings.add(a);
+        strings.add(t);
+        return Response.ok(strings).build();
     }
 
     @GET

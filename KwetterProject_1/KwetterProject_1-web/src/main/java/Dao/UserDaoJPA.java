@@ -24,7 +24,7 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     private EntityManager em;
 
     public UserDaoJPA() {
-        super(User.class);
+         super(User.class);
     }
 
     @Override
@@ -71,10 +71,11 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List findAllUsers() {
         // @SuppressWarnings("unchecked")
-        return em.createNamedQuery("User.findAllUsers", User.class)
+        List users = em.createNamedQuery("User.findAllUsers")
                 .getResultList();
+        return users;
 //        return results;
     }
 

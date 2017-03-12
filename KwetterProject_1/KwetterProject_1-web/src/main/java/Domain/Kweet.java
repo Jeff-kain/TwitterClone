@@ -25,6 +25,9 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT k FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
             + "WHERE userName = :userName)"),
+    @NamedQuery(name = "Kweet.findRecentKweets", query =  "SELECT k FROM Kweet k,"
+            + " User u WHERE user_id IN (SELECT id FROM User u "
+            + "WHERE userName = :userName) ORDER BY postdate DESC" )
 })
 @Entity
 public class Kweet implements Serializable {

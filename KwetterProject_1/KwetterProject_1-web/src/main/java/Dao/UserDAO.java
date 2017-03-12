@@ -22,7 +22,7 @@ public interface UserDAO {
 
     void removeUser(User user);
 
-    List<User> findAllUsers();
+    List findAllUsers();
 
     User find(String username);
 

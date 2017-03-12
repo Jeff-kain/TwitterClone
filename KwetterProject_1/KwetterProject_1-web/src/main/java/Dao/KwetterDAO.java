@@ -15,14 +15,15 @@ import java.util.List;
  */
 public interface KwetterDAO {
 
+    void createKweet(Kweet kweet);
 
-    public void createKweet(Kweet kweet);
+    boolean removeFollowing(User invokingUser, User targetUser);
 
-    public boolean removeFollowing(User invokingUser, User targetUser);
+    boolean addFollowing(User invokingUser, User targetedUser);
 
-    public boolean addFollowing(User invokingUser, User targetedUser);
+    List<Kweet> getKweetsByUser(String userName);
 
-    public List<Kweet> getKweetsByUser(String userName);
+    List<Kweet> findAllKweets();
 
-    public List<Kweet> findAllKweets();
+    List findRecentKweets(String userName);
 }

@@ -31,9 +31,27 @@ public class InitKwetter {
         User u3 = new User("Goku", "Goku.nl");
 
         Kweet k1 = new Kweet("Yo", u);
-        Kweet k2 = new Kweet("yoyo", u);
-        service.createKweet(k2);
+        Kweet k2 = new Kweet("yo2", u);
+        Kweet k3 = new Kweet("yo3", u);
+        Kweet k4 = new Kweet("yo4", u);
+        Kweet k5 = new Kweet("yo5", u);
+        Kweet k6 = new Kweet("yo6", u);
+        Kweet k7 = new Kweet("yo7", u);
+        Kweet k8 = new Kweet("yo8", u);
+        Kweet k9 = new Kweet("yo9", u);
+        Kweet k10 = new Kweet("yo10", u);
+        Kweet k11 = new Kweet("yo11", u);
         service.createKweet(k1);
+        service.createKweet(k2);
+        service.createKweet(k3);
+        service.createKweet(k4);
+        service.createKweet(k5);
+        service.createKweet(k6);
+        service.createKweet(k7);
+        service.createKweet(k8);
+        service.createKweet(k9);
+        service.createKweet(k10);
+        service.createKweet(k11);
 //        u1.addKweet(k2);
 //        u1.addKweet(k1);
 

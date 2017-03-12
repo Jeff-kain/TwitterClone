@@ -29,7 +29,7 @@ public class User implements Serializable {
     private String url;
 //    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
 //    private List<User> following;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Kweet> kweets;
 
     @JoinTable(name = "followers", joinColumns = {
@@ -39,11 +39,9 @@ public class User implements Serializable {
     })
     @ManyToMany
     private List<User> following = new ArrayList();
-    @ManyToOne
-    private User parent;
     @ManyToMany(mappedBy = "following")
     private List<User> followers;
-
+    
     public User() {
     }
 
