@@ -42,7 +42,7 @@ public class UserTest {
     @Before
     public void setUp() {
         service = new KwetterService();
-        service.setKwetterDAO(kwetterDAO);
+        // service.setKwetterDAO(kwetterDAO);
     }
 
     @After

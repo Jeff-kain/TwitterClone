@@ -15,6 +15,8 @@ import javax.persistence.*;
  *
  * @author jeffrey
  */
+@NamedQueries({
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),})
 @Entity
 public class User implements Serializable {
 
@@ -22,6 +24,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     private String userName;
     private String url;
 //    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
@@ -40,6 +43,9 @@ public class User implements Serializable {
     private User parent;
     @ManyToMany(mappedBy = "following")
     private List<User> followers;
+
+    public User() {
+    }
 
     public User(String userName, String url) {
         this.userName = userName;

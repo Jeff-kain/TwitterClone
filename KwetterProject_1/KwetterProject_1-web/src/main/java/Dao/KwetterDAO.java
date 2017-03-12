@@ -22,7 +22,7 @@ public interface KwetterDAO {
 
     public boolean addFollowing(User invokingUser, User targetedUser);
 
-    public List<Kweet> getKweetsByUser(User user);
+    public List<Kweet> getKweetsByUser(String userName);
 
     public List<Kweet> findAllKweets();
 }

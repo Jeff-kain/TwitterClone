@@ -9,6 +9,7 @@ import Domain.Kweet;
 import Domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.*;
 
 /**
@@ -57,14 +58,15 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
     }
 
     @Override
-    public List<Kweet> getKweetsByUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Kweet> getKweetsByUser(String userName) {
+        return em.createNamedQuery("Kweet.findKweetsByUser", Kweet.class)
+                .getResultList();
     }
 
     @Override
     public List<Kweet> findAllKweets() {
         List<Kweet> kweets;
-        kweets = em.createNamedQuery("Kweet.findAll").getResultList();
+        kweets = em.createNamedQuery("Kweet.findAll", Kweet.class).getResultList();
         return kweets;
     }
 

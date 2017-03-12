@@ -5,6 +5,7 @@
  */
 package Service;
 
+import Dao.JPA;
 import Dao.KwetterDAO;
 import Dao.UserDAO;
 import Domain.Kweet;
@@ -26,16 +27,16 @@ public class KwetterService {
 
     @Inject
     private KwetterDAO kwetterDAO;
-    
-    @Inject 
+
+    @Inject
     private UserDAO userDAO;
 
     public void setKwetterDAO(KwetterDAO dao) {
-       // kwetterDAO = dao;
+        kwetterDAO = dao;
     }
-    
+
     public void setuserDAO(UserDAO dao) {
-        // userDAO = dao;
+        userDAO = dao;
     }
 
     public void registerUser(User user) {
@@ -46,7 +47,7 @@ public class KwetterService {
     public void updateUser(User user) {
         userDAO.updateUser(user);
     }
-    
+
     public void removeUser(User user) {
         userDAO.removeUser(user);
     }
@@ -68,13 +69,17 @@ public class KwetterService {
         return userDAO.getFollowing(user);
     }
 
-    public List<User> findAll() {
-        List<User> allUsers = userDAO.findAllUsers();
+    public List findAll() {
+        List allUsers = userDAO.findAllUsers();
         return allUsers;
     }
 
-    public List<Kweet> findAllTweets() {
+    public List findAllKweets() {
         return kwetterDAO.findAllKweets();
+    }
+
+    public List<Kweet> findKweetsByUser(String userName) {
+        return kwetterDAO.getKweetsByUser(userName);
     }
 
     public void unfollowUser(User follower, User followee) {

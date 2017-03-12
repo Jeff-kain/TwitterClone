@@ -40,7 +40,7 @@ public class KweetTest {
     @Before
     public void setUp() {
         service = new KwetterService();
-        service.setKwetterDAO(kwetterDAO);
+      //  service.setKwetterDAO(kwetterDAO);
     }
 
     @After

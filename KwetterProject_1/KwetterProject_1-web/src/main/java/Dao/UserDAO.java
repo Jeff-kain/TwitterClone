@@ -24,11 +24,11 @@ public interface UserDAO {
 
     List<User> findAllUsers();
 
-    public User find(String username);
+    User find(String username);
 
-    public List<User> getFollowing(User user);
+    List<User> getFollowing(User user);
 
-    public List<User> getFollowers(User user);
+    List<User> getFollowers(User user);
 
     List<String> findAllFollowing(String username);
 

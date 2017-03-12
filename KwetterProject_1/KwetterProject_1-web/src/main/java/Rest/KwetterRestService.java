@@ -12,6 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import static javax.ws.rs.core.MediaType.*;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -33,29 +34,47 @@ public class KwetterRestService {
     @GET
     @Path("/getAllUsers")
     @Produces({APPLICATION_JSON, APPLICATION_XML})
-    public List<User> getAllUsers() {
-        return kwetterService.findAll();
+    public Response getAllUsers() {
+        final List users = kwetterService.findAll();
+
+        return Response.ok(users).build();
     }
 
     @GET
-    @Path("/{username}")
+    @Path("/getAllKweets")
     @Produces({APPLICATION_JSON, APPLICATION_XML})
-    public User getUser(@PathParam("username") String username) {
-        return kwetterService.find(username);
+    public Response getAllKweets() {
+        final List Kweets = kwetterService.findAllKweets();
+
+        return Response.ok(Kweets).build();
     }
 
-    @PUT
-    @Path("/{username}")
+    @GET
+    @Path("/getKweetsByUser/{userName}")
     @Produces({APPLICATION_JSON, APPLICATION_XML})
-    public User updateUser(@PathParam("username") String username, User user) {
-        if (user.getUserName().equalsIgnoreCase(username)) {
-            kwetterService.updateUser(user);
-            return user;
-        } else {
-            throw new RuntimeException("Failure");
-        }
+    public Response getKweetsByUser(@PathParam("userName") String userName) {
+        final List<Kweet> KweetsByUser = kwetterService.findKweetsByUser(userName);
+        return Response.ok(KweetsByUser).build();
     }
 
+//    @GET
+//    @Path("/{username}")
+//    @Produces({APPLICATION_JSON, APPLICATION_XML})
+//    public User getUser(@PathParam("username")String username) {
+//        return kwetterService.find(username);
+//    }
+//
+//    @PUT
+//    @Path("/{username}")
+//    @Produces({APPLICATION_JSON, APPLICATION_XML})
+//    public User updateUser(@PathParam("username") String username, User user) {
+//        if (user.getUserName().equalsIgnoreCase(username)) {
+//            kwetterService.updateUser(user);
+//            return user;
+//        } else {
+//            throw new RuntimeException("Failure");
+//        }
+//    }
 //    @GET
 //    @Path("/{username}/tweets")
 //    @Produces({APPLICATION_JSON, APPLICATION_XML})
