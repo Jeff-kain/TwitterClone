@@ -15,17 +15,7 @@ import java.util.List;
  */
 public interface KwetterDAO {
 
-    public void createUser(User user);
 
-    public void updateUser(User user);
-
-    public List<User> getFollowers(User user);
-
-    public User findUserById(long id);
-
-    public User findUserByName(String username);
-
-    //maybe split here?
     public void createKweet(Kweet kweet);
 
     public boolean removeFollowing(User invokingUser, User targetUser);
@@ -33,13 +23,6 @@ public interface KwetterDAO {
     public boolean addFollowing(User invokingUser, User targetedUser);
 
     public List<Kweet> getKweetsByUser(User user);
-
-    public User find(String username);
-
-
-    public List<User> getFollowing(User user);
-
-    public List<User> findAllUsers();
 
     public List<Kweet> findAllKweets();
 }

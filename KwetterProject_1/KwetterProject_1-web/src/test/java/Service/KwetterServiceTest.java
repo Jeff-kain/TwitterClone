@@ -6,6 +6,7 @@ package Service;
  * and open the template in the editor. testtt1
  */
 import Dao.KwetterDAO;
+import Dao.UserDAO;
 import Domain.Kweet;
 import Domain.User;
 import Service.KwetterService;
@@ -32,6 +33,8 @@ public class KwetterServiceTest {
     private KwetterService service;
     @Mock
     private KwetterDAO kwetterDAO;
+    @Mock 
+    private UserDAO userDAO;
 
     public KwetterServiceTest() {
 
@@ -49,6 +52,7 @@ public class KwetterServiceTest {
     public void setUp() {
         service = new KwetterService();
         service.setKwetterDAO(kwetterDAO);
+        service.setuserDAO(userDAO);
     }
 
     @After
@@ -68,7 +72,7 @@ public class KwetterServiceTest {
         User user2 = new User("User", "www.user2.org");
         service.registerUser(user2);
         service.followUser(user1, user2);
-        Mockito.verify(kwetterDAO, Mockito.times(1)).updateUser(user1);
+        Mockito.verify(userDAO, Mockito.times(1)).updateUser(user1);
     }
 //
     @Test
@@ -78,7 +82,7 @@ public class KwetterServiceTest {
         User user2 = new User("User", "www.user2.org");
         service.registerUser(user2);
         service.unfollowUser(user1, user2);
-        Mockito.verify(kwetterDAO, Mockito.times(1)).updateUser(user1);
+        Mockito.verify(userDAO, Mockito.times(1)).updateUser(user1);
     }
 //
     @Test
@@ -89,7 +93,7 @@ public class KwetterServiceTest {
         service.registerUser(user2);
         service.followUser(user1, user2);
         service.getFollowers(user2);
-        Mockito.verify(kwetterDAO, Mockito.times(1)).getFollowers(user2);
+        Mockito.verify(userDAO, Mockito.times(1)).getFollowers(user2);
     }
 
     @Test

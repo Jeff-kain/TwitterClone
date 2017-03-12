@@ -6,6 +6,7 @@
 package Service;
 
 import Dao.KwetterDAO;
+import Dao.UserDAO;
 import Domain.Kweet;
 import Domain.User;
 import java.util.List;
@@ -25,39 +26,50 @@ public class KwetterService {
 
     @Inject
     private KwetterDAO kwetterDAO;
+    
+    @Inject 
+    private UserDAO userDAO;
 
     public void setKwetterDAO(KwetterDAO dao) {
-        kwetterDAO = dao;
+       // kwetterDAO = dao;
+    }
+    
+    public void setuserDAO(UserDAO dao) {
+        // userDAO = dao;
     }
 
     public void registerUser(User user) {
-        kwetterDAO.createUser(user);
+        userDAO.createUser(user);
 
     }
 
     public void updateUser(User user) {
-        kwetterDAO.updateUser(user);
+        userDAO.updateUser(user);
+    }
+    
+    public void removeUser(User user) {
+        userDAO.removeUser(user);
     }
 
     public void followUser(User follower, User followee) {
         follower.addFollow(followee);
-        kwetterDAO.updateUser(follower);
+        userDAO.updateUser(follower);
     }
 
     public User find(String username) {
-        return kwetterDAO.find(username);
+        return userDAO.find(username);
     }
 
     public List<User> getFollowers(User user) {
-        return kwetterDAO.getFollowers(user);
+        return userDAO.getFollowers(user);
     }
 
     public List<User> getFollowing(User user) {
-        return kwetterDAO.getFollowing(user);
+        return userDAO.getFollowing(user);
     }
 
     public List<User> findAll() {
-        List<User> allUsers = kwetterDAO.findAllUsers();
+        List<User> allUsers = userDAO.findAllUsers();
         return allUsers;
     }
 
@@ -67,7 +79,7 @@ public class KwetterService {
 
     public void unfollowUser(User follower, User followee) {
         follower.removeFollow(followee);
-        kwetterDAO.updateUser(follower);
+        userDAO.updateUser(follower);
     }
 
     public void createKweet(Kweet kweet) {
