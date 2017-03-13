@@ -89,11 +89,11 @@ public class KwetterServiceTest {
     public void testGetFollowers() throws Exception {
         User user1 = new User("User", "www.user1.org");
         service.registerUser(user1);
-        User user2 = new User("User", "www.user2.org");
+        User user2 = new User("User2", "www.user2.org");
         service.registerUser(user2);
         service.followUser(user1, user2);
-        service.getFollowers(user2);
-        Mockito.verify(userDAO, Mockito.times(1)).getFollowers(user2);
+        service.getFollowers("User");
+        Mockito.verify(userDAO, Mockito.times(1)).getFollowers("User");
     }
 
     @Test

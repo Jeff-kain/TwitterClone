@@ -28,7 +28,7 @@ public interface UserDAO {
 
     List<User> getFollowing(User user);
 
-    List<User> getFollowers(User user);
+    List getFollowers(String userName);
 
     List<String> findAllFollowing(String username);
 

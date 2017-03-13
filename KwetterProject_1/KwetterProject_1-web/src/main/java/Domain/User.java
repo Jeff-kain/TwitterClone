@@ -16,7 +16,9 @@ import javax.persistence.*;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),})
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
+})
 @Entity
 public class User implements Serializable {
 
@@ -24,30 +26,31 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true)
+    @Column(name = "userName", unique = true)
     private String userName;
+    @Column(name = "url")
     private String url;
 //    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
 //    private List<User> following;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Kweet> kweets;
 
-    @JoinTable(name = "followers", joinColumns = {
-        @JoinColumn(name = "followers")
+    @JoinTable(name = "follower", joinColumns = {
+        @JoinColumn(name = "follower_id")
     }, inverseJoinColumns = {
-        @JoinColumn(name = "following")
+        @JoinColumn(name = "following_id")
     })
     @ManyToMany
     private List<User> following = new ArrayList();
     @ManyToMany(mappedBy = "following")
     private List<User> followers;
-    
-    public User() {
-    }
 
     public User(String userName, String url) {
         this.userName = userName;
         this.url = url;
+    }
+
+    public User() {
     }
 
     public Long getId() {

@@ -61,8 +61,8 @@ public class KwetterService {
         return userDAO.find(username);
     }
 
-    public List<User> getFollowers(User user) {
-        return userDAO.getFollowers(user);
+    public List getFollowers(String userName) {
+        return userDAO.getFollowers(userName);
     }
 
     public List<User> getFollowing(User user) {
@@ -74,7 +74,7 @@ public class KwetterService {
         return allUsers;
     }
 
-    public List<Kweet> findAllKweets() {
+    public List findAllKweets() {
         return kwetterDAO.findAllKweets();
     }
     
@@ -82,7 +82,7 @@ public class KwetterService {
         return kwetterDAO.findRecentKweets(userName);
     }
 
-    public List<Kweet> findKweetsByUser(String userName) {
+    public List findKweetsByUser(String userName) {
         return kwetterDAO.getKweetsByUser(userName);
     }
 

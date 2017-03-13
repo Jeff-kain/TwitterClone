@@ -21,9 +21,9 @@ public interface KwetterDAO {
 
     boolean addFollowing(User invokingUser, User targetedUser);
 
-    List<Kweet> getKweetsByUser(String userName);
+    List getKweetsByUser(String userName);
 
-    List<Kweet> findAllKweets();
+    List findAllKweets();
 
     List findRecentKweets(String userName);
 }

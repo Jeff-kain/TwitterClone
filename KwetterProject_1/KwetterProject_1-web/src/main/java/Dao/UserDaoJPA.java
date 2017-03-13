@@ -24,7 +24,7 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     private EntityManager em;
 
     public UserDaoJPA() {
-         super(User.class);
+        super(User.class);
     }
 
     @Override
@@ -48,10 +48,9 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     }
 
     @Override
-    public List<User> getFollowers(User user) {
-        List<User> followers;
-        followers = em.createNamedQuery("User.getFollowers").setParameter("Id", user.getId()).getResultList();
-        return followers;
+    public List getFollowers(String userName) {
+        return em.createNamedQuery("User.findFollowers").setParameter("userName", userName)
+                .getResultList();
     }
 
     @Override

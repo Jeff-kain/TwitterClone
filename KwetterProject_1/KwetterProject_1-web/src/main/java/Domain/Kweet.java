@@ -7,7 +7,9 @@ package Domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,13 +23,14 @@ import javax.persistence.NamedQuery;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "Kweet.findAll", query = "SELECT k FROM Kweet k"),
-    @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT k FROM Kweet k,"
+    @NamedQuery(name = "Kweet.findAll", query = "SELECT k.id, k.content, k.postDate FROM Kweet k"),
+    @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT k.id,k.content,k.postDate FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
             + "WHERE userName = :userName)"),
-    @NamedQuery(name = "Kweet.findRecentKweets", query =  "SELECT k FROM Kweet k,"
+    @NamedQuery(name = "Kweet.findRecentKweets", query =  "SELECT k.id,k.content,k.postDate FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
             + "WHERE userName = :userName) ORDER BY postdate DESC" )
+    
 })
 @Entity
 public class Kweet implements Serializable {
@@ -43,8 +46,7 @@ public class Kweet implements Serializable {
     @ManyToOne
     private User user;
     
-    public Kweet () {
-        
+    public Kweet () {  
     }
   
     public Kweet (String content, User owner) {

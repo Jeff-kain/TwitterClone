@@ -54,10 +54,12 @@ public class InitKwetter {
         service.createKweet(k11);
 //        u1.addKweet(k2);
 //        u1.addKweet(k1);
-
         service.registerUser(u);
         service.registerUser(u1);
         service.registerUser(u2);
         service.registerUser(u3);
+        service.followUser(u2, u);
+        service.followUser(u, u2);
+
     }
 }

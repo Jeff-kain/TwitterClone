@@ -58,15 +58,15 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
     }
 
     @Override
-    public List<Kweet> getKweetsByUser(String userName) {
+    public List getKweetsByUser(String userName) {
         return em.createNamedQuery("Kweet.findKweetsByUser").setParameter("userName", userName)
                 .getResultList();
     }
 
     @Override
-    public List<Kweet> findAllKweets() {
-        List<Kweet> kweets;
-        kweets = em.createNamedQuery("Kweet.findAll", Kweet.class).getResultList();
+    public List findAllKweets() {
+        List kweets;
+        kweets = em.createNamedQuery("Kweet.findAll").getResultList();
         return kweets;
     }
 
