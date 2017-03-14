@@ -18,6 +18,7 @@ import javax.persistence.*;
 @NamedQueries({
     @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
+    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.userName FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
 })
 @Entity
 public class User implements Serializable {

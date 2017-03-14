@@ -7,9 +7,14 @@ package Service;
 
 import Domain.Kweet;
 import Domain.User;
+import Exceptions.KwetterException;
+import Exceptions.UserException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -25,6 +30,16 @@ public class InitKwetter {
 
     @PostConstruct
     private void initData() {
+
+        try {
+            this.createData();
+        } catch (KwetterException ex) {
+            Logger.getLogger(InitKwetter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void createData() throws KwetterException {
         User u = new User("Jeff", "Tilburg.nl");
         User u1 = new User("Frankie", "Frankie.nl");
         User u2 = new User("Bob", "Bob.nl");
@@ -54,15 +69,20 @@ public class InitKwetter {
         service.createKweet(k11);
 //        u1.addKweet(k2);
 //        u1.addKweet(k1);
-        service.registerUser(u);
-        service.registerUser(u1);
-        service.registerUser(u2);
-        service.registerUser(u3);
-        service.followUser(u2, u);
-        service.followUser(u, u2);
-        service.followUser(u3, u);
-        service.followUser(u, u3);
-        service.followUser(u3, u2);
 
+        try {
+            service.registerUser(u);
+            service.registerUser(u1);
+            service.registerUser(u2);
+            service.registerUser(u3);
+
+            service.followUser(u2, u);
+            service.followUser(u, u2);
+            service.followUser(u3, u);
+            service.followUser(u, u3);
+            service.followUser(u3, u2);
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
     }
 }

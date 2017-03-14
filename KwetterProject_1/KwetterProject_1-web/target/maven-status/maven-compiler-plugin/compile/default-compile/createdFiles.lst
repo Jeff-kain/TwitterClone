@@ -13,4 +13,7 @@ Dao\DaoFacade.class
 Dao\JPA.class
 Domain\User.class
 Domain\Kweet_.class
+Exceptions\UserException.class
 Rest\KwetterRestApi.class
+Exceptions\KwetterException.class
+Exceptions\KweetException.class

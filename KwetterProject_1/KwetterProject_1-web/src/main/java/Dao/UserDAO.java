@@ -6,6 +6,7 @@
 package Dao;
 
 import Domain.User;
+import Exceptions.KwetterException;
 import java.util.List;
 
 /**
@@ -16,17 +17,17 @@ public interface UserDAO {
 
     User findUser(String username);
 
-    void createUser(User user);
+    void createUser(User user) throws KwetterException;
 
-    void updateUser(User user);
+    void updateUser(User user) throws KwetterException;
 
-    void removeUser(User user);
+    void removeUser(User user) throws KwetterException;
 
     List findAllUsers();
 
     User find(String username);
 
-    List<User> getFollowing(User user);
+    List<User> getFollowing(String userName);
 
     List getFollowers(String userName);
 

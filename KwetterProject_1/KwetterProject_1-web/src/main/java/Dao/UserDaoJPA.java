@@ -6,6 +6,7 @@
 package Dao;
 
 import Domain.User;
+import Exceptions.KwetterException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
@@ -33,17 +34,17 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     }
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user) throws KwetterException{
         em.persist(user);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(User user) throws KwetterException{
         em.merge(user);
     }
 
     @Override
-    public void removeUser(User user) {
+    public void removeUser(User user) throws KwetterException{
         em.remove(user);
     }
 
@@ -63,10 +64,8 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     }
 
     @Override
-    public List<User> getFollowing(User user) {
-        List<User> followers;
-        followers = em.createNamedQuery("User.getFollowing").setParameter("Id", user.getId()).getResultList();
-        return followers;
+    public List getFollowing(String userName) {
+        return em.createNamedQuery("User.findFollowing").setParameter("userName", userName).getResultList();
     }
 
     @Override

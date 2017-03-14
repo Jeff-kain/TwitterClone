@@ -66,6 +66,14 @@ public class KwetterRestApi {
     }
 
     @GET
+    @Path("/following/{userName}")
+    @Produces({APPLICATION_JSON})
+    public Response getFollowing(@PathParam("userName") String userName) {
+        List followers = kwetterService.getFollowing(userName);
+        return Response.ok(followers).build();
+    }
+
+    @GET
     @Path("/getList")
     @Produces({APPLICATION_JSON})
     public Response getList() {

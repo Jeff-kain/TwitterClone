@@ -10,6 +10,8 @@ import Dao.KwetterDAO;
 import Dao.UserDAO;
 import Domain.Kweet;
 import Domain.User;
+import Exceptions.KwetterException;
+import Exceptions.UserException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
@@ -39,22 +41,38 @@ public class KwetterService {
         userDAO = dao;
     }
 
-    public void registerUser(User user) {
-        userDAO.createUser(user);
-
+    public void registerUser(User user) throws UserException {
+        try {
+            userDAO.createUser(user);
+        } catch (KwetterException e) {
+            throw new UserException("Can't register user", e);
+        }
     }
 
-    public void updateUser(User user) {
-        userDAO.updateUser(user);
+    public void updateUser(User user) throws UserException {
+        try {
+            userDAO.updateUser(user);
+        } catch (KwetterException e) {
+            throw new UserException("Can't update user", e);
+        }
     }
 
-    public void removeUser(User user) {
-        userDAO.removeUser(user);
+    public void removeUser(User user) throws UserException {
+        try {
+            userDAO.updateUser(user);
+        } catch (KwetterException e) {
+            throw new UserException("Can't remove user", e);
+        }
     }
 
-    public void followUser(User follower, User followee) {
+    public void followUser(User follower, User followee) throws UserException {
         follower.addFollow(followee);
-        userDAO.updateUser(follower);
+        try {
+            userDAO.updateUser(follower);
+        } catch (KwetterException e) {
+            throw new UserException("Can't update user", e);
+        }
+
     }
 
     public User find(String username) {
@@ -65,8 +83,8 @@ public class KwetterService {
         return userDAO.getFollowers(userName);
     }
 
-    public List<User> getFollowing(User user) {
-        return userDAO.getFollowing(user);
+    public List getFollowing(String userName) {
+        return userDAO.getFollowing(userName);
     }
 
     public List findAll() {
@@ -77,7 +95,7 @@ public class KwetterService {
     public List findAllKweets() {
         return kwetterDAO.findAllKweets();
     }
-    
+
     public List findRecentKweets(String userName) {
         return kwetterDAO.findRecentKweets(userName);
     }
@@ -86,9 +104,13 @@ public class KwetterService {
         return kwetterDAO.getKweetsByUser(userName);
     }
 
-    public void unfollowUser(User follower, User followee) {
+    public void unfollowUser(User follower, User followee) throws UserException {
         follower.removeFollow(followee);
-        userDAO.updateUser(follower);
+        try {
+            userDAO.updateUser(follower);
+        } catch (KwetterException e) {
+            throw new UserException("Can't update user", e);
+        }
     }
 
     public void createKweet(Kweet kweet) {
