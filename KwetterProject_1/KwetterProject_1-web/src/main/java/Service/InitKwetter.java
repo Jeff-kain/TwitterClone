@@ -83,6 +83,8 @@ public class InitKwetter {
             service.followUser(u3, u2);
         } catch (UserException e) {
             e.printStackTrace();
+            
         }
+        
     }
 }
