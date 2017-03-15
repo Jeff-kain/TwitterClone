@@ -2,9 +2,9 @@ Domain\Heart.class
 Domain\Heart_.class
 Dao\UserDAO.class
 Rest\KwetterRestApplication.class
-Service\InitKwetter.class
 Dao\UserDaoJPA.class
 Domain\Kweet.class
+Service\Startup.class
 Dao\KwetterDAO.class
 Service\KwetterService.class
 Dao\KwetterDaoJPA.class

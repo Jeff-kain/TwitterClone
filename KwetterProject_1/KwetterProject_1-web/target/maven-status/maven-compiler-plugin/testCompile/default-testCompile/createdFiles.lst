@@ -1,5 +1,3 @@
-Dao\UserDaoTest.class
-Model\KweetTest.class
-Dao\KwetterDaoTest.class
 Service\KwetterServiceTest.class
-Model\UserTest.class
+Dao\UserDaoJPATest.class
+Dao\DatabaseCleaner.class

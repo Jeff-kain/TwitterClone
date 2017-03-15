@@ -24,13 +24,17 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     @PersistenceContext(unitName = "KwetterProject_KwetterProject_1-web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
     public UserDaoJPA() {
         super(User.class);
     }
 
     @Override
-    public User findUser(String username) {
-        return em.find(User.class, username);
+    public User findUser(String userName) {
+        return (User) em.createNamedQuery("User.finduser").setParameter("userName", userName).getSingleResult();
     }
 
     @Override
@@ -55,11 +59,8 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     }
 
     @Override
-    public User find(String username) {
-//        User u = em.createNamedQuery("User.findByUsername", User.class)
-//                .setParameter("username", username).getSingleResult();
-//        return u;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User find(String userName) {
+        return em.find(User.class, userName);
 
     }
 

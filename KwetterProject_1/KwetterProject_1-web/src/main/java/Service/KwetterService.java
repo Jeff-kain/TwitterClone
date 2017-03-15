@@ -66,7 +66,7 @@ public class KwetterService {
     }
 
     public void followUser(User follower, User followee) throws UserException {
-        follower.addFollow(followee);
+        follower.addFollower(followee);
         try {
             userDAO.updateUser(follower);
         } catch (KwetterException e) {
@@ -77,6 +77,10 @@ public class KwetterService {
 
     public User find(String username) {
         return userDAO.find(username);
+    }
+    
+    public User findUser(String username) {
+        return userDAO.findUser(username);
     }
 
     public List getFollowers(String userName) {
@@ -105,7 +109,7 @@ public class KwetterService {
     }
 
     public void unfollowUser(User follower, User followee) throws UserException {
-        follower.removeFollow(followee);
+        follower.removeFollower(followee);
         try {
             userDAO.updateUser(follower);
         } catch (KwetterException e) {

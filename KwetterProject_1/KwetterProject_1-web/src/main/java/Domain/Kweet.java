@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -23,49 +24,52 @@ import javax.persistence.NamedQuery;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "Kweet.findAll", query = "SELECT k.id, k.content, k.postDate FROM Kweet k"),
-    @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT k.id,k.content,k.postDate FROM Kweet k,"
+    @NamedQuery(name = "Kweet.findAll", query = "SELECT k.id, k.content, k.postDate FROM Kweet k")
+    ,
+    @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT DISTINCT(k.id),k.content,k.postDate FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName)"),
-    @NamedQuery(name = "Kweet.findRecentKweets", query =  "SELECT k.id,k.content,k.postDate FROM Kweet k,"
+            + "WHERE userName = :userName)")
+    ,
+    @NamedQuery(name = "Kweet.findRecentKweets", query = "SELECT DISTINCT(k.id),k.content,k.postDate FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName) ORDER BY postdate DESC" )
-    
+            + "WHERE userName = :userName) ORDER BY postdate DESC")
+
 })
 @Entity
 public class Kweet implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String content;
     private Date postDate;
-    
+
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
-    
-    public Kweet () {  
+
+    public Kweet() {
     }
-  
-    public Kweet (String content, User owner) {
+
+    public Kweet(String content, User owner) {
         this.content = content;
         this.user = owner;
         this.postDate = new Date();
     }
-    public Long getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
-    
-        public String getContent() {
+
+    public String getContent() {
         return content;
     }
-    
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -81,7 +85,7 @@ public class Kweet implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (int) id;
         return hash;
     }
 
@@ -92,7 +96,7 @@ public class Kweet implements Serializable {
             return false;
         }
         Kweet other = (Kweet) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -102,5 +106,5 @@ public class Kweet implements Serializable {
     public String toString() {
         return "Domain.Tweet[ id=" + id + " ]";
     }
-    
+
 }

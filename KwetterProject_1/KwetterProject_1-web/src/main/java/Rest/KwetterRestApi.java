@@ -7,10 +7,13 @@ package Rest;
 
 import Domain.Kweet;
 import Domain.User;
+import Exceptions.UserException;
 import Service.KwetterService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import static javax.ws.rs.core.MediaType.*;
@@ -50,7 +53,7 @@ public class KwetterRestApi {
     }
 
     @GET
-    @Path("/kweets/{userName}")
+    @Path("/{userName}/kweets/recent")
     @Produces({APPLICATION_JSON})
     public Response getRecentKweets(@PathParam("userName") String userName) {
         List Kweets = kwetterService.findRecentKweets(userName);
@@ -58,7 +61,7 @@ public class KwetterRestApi {
     }
 
     @GET
-    @Path("/followers/{userName}")
+    @Path("/{userName}/followers")
     @Produces({APPLICATION_JSON})
     public Response getFollowers(@PathParam("userName") String userName) {
         List followers = kwetterService.getFollowers(userName);
@@ -66,7 +69,7 @@ public class KwetterRestApi {
     }
 
     @GET
-    @Path("/following/{userName}")
+    @Path("/{userName}/following")
     @Produces({APPLICATION_JSON})
     public Response getFollowing(@PathParam("userName") String userName) {
         List followers = kwetterService.getFollowing(userName);
@@ -74,48 +77,34 @@ public class KwetterRestApi {
     }
 
     @GET
-    @Path("/getList")
-    @Produces({APPLICATION_JSON})
-    public Response getList() {
-        Collection<String> strings;
-        strings = new ArrayList<String>();
-        String t = "test1";
-        String a = "test2";
-        strings.add(a);
-        strings.add(t);
-        return Response.ok(strings).build();
-    }
-
-    @GET
-    @Path("/getKweetsByUser/{userName}")
+    @Path("/{userName}/kweets")
     @Produces({APPLICATION_JSON})
     public Response getKweetsByUser(@PathParam("userName") String userName) {
         final List KweetsByUser = kwetterService.findKweetsByUser(userName);
         return Response.ok(KweetsByUser).build();
     }
 
-//    @GET
-//    @Path("/{username}")
-//    @Produces({APPLICATION_JSON, APPLICATION_XML})
-//    public User getUser(@PathParam("username")String username) {
-//        return kwetterService.find(username);
-//    }
-//
-//    @PUT
-//    @Path("/{username}")
-//    @Produces({APPLICATION_JSON, APPLICATION_XML})
-//    public User updateUser(@PathParam("username") String username, User user) {
-//        if (user.getUserName().equalsIgnoreCase(username)) {
-//            kwetterService.updateUser(user);
-//            return user;
-//        } else {
-//            throw new RuntimeException("Failure");
-//        }
-//    }
-//    @GET
-//    @Path("/{username}/tweets")
-//    @Produces({APPLICATION_JSON, APPLICATION_XML})
-//    public List<Kweet> getKweets(@PathParam("username") String username) {
-//        return kwetterService.fin(username);
-//    }
+    @POST
+    @Path("{userName}/kweets")
+    @Consumes(TEXT_PLAIN)
+    public Response postKweet(@PathParam("userName") String userName, String content) {
+        User user = kwetterService.findUser(userName);
+        Kweet kweet = new Kweet(content,user);
+        kwetterService.createKweet(kweet);
+        return Response.ok().build();
+    }
+    
+    @POST
+    @Path("{userName}/addfollowing/{followee}")
+    public Response postAddFollowing(@PathParam("userName") String userName, @PathParam("followee") String userNameFollowee) {
+        User follower = kwetterService.findUser(userName);
+        User followee = kwetterService.findUser(userNameFollowee);
+        try {
+            kwetterService.followUser(followee, follower);
+            return Response.ok().build();
+        } catch (UserException ex) {
+            Logger.getLogger(KwetterRestApi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Response.serverError().build();
+    }
 }

@@ -16,17 +16,21 @@ import javax.persistence.*;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
-    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.userName FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
-})
+    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE userName =:userName")
+    ,
+
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u")
+    ,
+    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)")
+    ,
+    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.userName FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),})
 @Entity
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column(name = "userName", unique = true)
     private String userName;
     @Column(name = "url")
@@ -54,11 +58,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -86,11 +90,11 @@ public class User implements Serializable {
         return followers;
     }
 
-    public void addFollow(User follow) {
+    public void addFollower(User follow) {
         this.following.add(follow);
     }
 
-    public void removeFollow(User follow) {
+    public void removeFollower(User follow) {
         this.following.remove(follow);
     }
 
@@ -105,7 +109,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (int) id;
         return hash;
     }
 
@@ -116,7 +120,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
