@@ -32,7 +32,7 @@ import javax.persistence.NamedQuery;
     ,
     @NamedQuery(name = "Kweet.findRecentKweets", query = "SELECT DISTINCT(k.id),k.content,k.postDate FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName) ORDER BY postdate DESC")
+            + "WHERE userName = :userName) ORDER BY postDate DESC")
 
 })
 @Entity
@@ -40,11 +40,12 @@ public class Kweet implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String content;
     private Date postDate;
 
+    @JsonIgnoreProperties("kweets")
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
