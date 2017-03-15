@@ -16,10 +16,10 @@ import javax.persistence.*;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "User.finduser", query = "SELECT u.id, u.url, u.userName FROM User u WHERE userName =:userName")
+    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE userName =:userName")
     ,
 
-    @NamedQuery(name = "User.findAllUsers", query = "SELECT u.id, u.url, U.userName FROM User u")
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u.id, u.url, u.userName FROM User u")
     ,
     @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)")
     ,
@@ -37,7 +37,7 @@ public class User implements Serializable {
     private String url;
 //    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
 //    private List<User> following;
-    
+
     @OneToMany(mappedBy = "user")
     private List<Kweet> kweets;
 
@@ -50,6 +50,9 @@ public class User implements Serializable {
     private List<User> following = new ArrayList();
     @ManyToMany(mappedBy = "following")
     private List<User> followers;
+    
+//    @OneToMany(mappedBy = "user")
+//    private List<Heart> hearts;
 
     public User(String userName, String url) {
         this.userName = userName;

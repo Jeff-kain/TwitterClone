@@ -34,7 +34,8 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
 
     @Override
     public User findUser(String userName) {
-        return (User) em.createNamedQuery("User.finduser").setParameter("userName", userName).getSingleResult();
+        List<User> users = em.createNamedQuery("User.finduser").setParameter("userName", userName).getResultList();
+        return users.get(0);
     }
 
     @Override
@@ -59,8 +60,8 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     }
 
     @Override
-    public User find(String userName) {
-        return em.find(User.class, userName);
+    public User find(int id) {
+        return em.find(User.class, id);
 
     }
 
@@ -71,43 +72,13 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
 
     @Override
     public List findAllUsers() {
-        // @SuppressWarnings("unchecked")
         List users = em.createNamedQuery("User.findAllUsers")
                 .getResultList();
         return users;
-//        return results;
-    }
-
-    @Override
-    public List<String> findAllFollowing(String username) {
-        @SuppressWarnings("unchecked")
-        final List<String> results = em
-                .createNativeQuery(
-                        "SELECT f.follows FROM Following f where f.user = ?1")
-                .setParameter(1, username).getResultList();
-        return results;
-    }
-
-    @Override
-    public int countFollowers(String username) {
-        Number count = (Number) em
-                .createNativeQuery(
-                        "SELECT count(f.user) FROM Following f where f.follows = ?1")
-                .setParameter(1, username).getSingleResult();
-        return count.intValue();
-    }
-
-    @Override
-    public int countFollowing(String username) {
-        Number count = (Number) em
-                .createNativeQuery(
-                        "SELECT count(f.follows) FROM Following f where f.user = ?1")
-                .setParameter(1, username).getSingleResult();
-        return count.intValue();
     }
 
     @Override
     protected EntityManager getEntityManager() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.em;
     }
 }

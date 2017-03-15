@@ -25,15 +25,9 @@ public interface UserDAO {
 
     List findAllUsers();
 
-    User find(String username);
-
+    User find(int id);
+    
     List<User> getFollowing(String userName);
 
     List getFollowers(String userName);
-
-    List<String> findAllFollowing(String username);
-
-    int countFollowers(String username);
-
-    int countFollowing(String username);
 }

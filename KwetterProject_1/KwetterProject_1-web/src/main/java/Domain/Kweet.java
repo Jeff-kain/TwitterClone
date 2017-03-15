@@ -8,6 +8,8 @@ package Domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -43,7 +46,7 @@ public class Kweet implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String content;
-    private Date postDate;
+    private GregorianCalendar postDate;
 
     @JsonIgnoreProperties("kweets")
     @JoinColumn(name = "user_id")
@@ -56,7 +59,7 @@ public class Kweet implements Serializable {
     public Kweet(String content, User owner) {
         this.content = content;
         this.user = owner;
-        this.postDate = new Date();
+        this.postDate = new GregorianCalendar();
     }
 
     public int getId() {
@@ -75,7 +78,7 @@ public class Kweet implements Serializable {
         this.content = content;
     }
 
-    public Date getDate() {
+    public GregorianCalendar getDate() {
         return postDate;
     }
 
