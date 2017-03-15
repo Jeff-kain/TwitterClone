@@ -20,7 +20,7 @@ public class Heart implements Serializable {
     
     private User user;
     
-    private int tweetId;
+    private Kweet Kweet;
     
     private static final long serialVersionUID = 1L;
     @Id

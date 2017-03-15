@@ -6,8 +6,12 @@
 package Dao;
 
 import Domain.User;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,15 +28,12 @@ import static org.junit.Assert.*;
 public class UserDaoJPATest {
 
     public UserDaoJPATest() {
-        userDao = new UserDaoJPA();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("KwetterProject_KwetterProject_1-web_war_1.0-SNAPSHOTPU");
-        em = emf.createEntityManager();
-        userDao.setEm(em);
-        dbc = new DatabaseCleaner(em);
     }
 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("KwetterProject_KwetterProject_1-web_war_1.0-SNAPSHOTPU2");
     private EntityManager em;
     private UserDaoJPA userDao;
+    private EntityTransaction tx;
     private DatabaseCleaner dbc;
 
     User user1;
@@ -48,15 +49,20 @@ public class UserDaoJPATest {
 
     @Before
     public void setUp() {
-        dbc.clean();
-        em.getTransaction().begin();
+        try {
+            new DatabaseCleaner(emf.createEntityManager()).clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoJPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        em = emf.createEntityManager();
+        tx = em.getTransaction();
+
+        userDao = new UserDaoJPA();
+        userDao.setEm(em);
     }
 
     @After
     public void tearDown() {
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().commit();
-        }
     }
 
     // TODO add test methods here.
@@ -64,12 +70,25 @@ public class UserDaoJPATest {
     //
     // @Test
     // public void hello() {}
-//    @Test
-//    public void testCreateUser() throws Exception {
-//        Assert.assertTrue(true);
-//        user1 = new User("User", "www.user1.org");
-//        userDao.create(user1);
-//        User u = userDao.find(user1);
-//        assertEquals(user1, u);
-//    }
+    @Test
+    public void testCreateUser() throws Exception {
+        user1 = new User("User", "www.user1.org");
+        tx.begin();
+        userDao.create(user1);
+        tx.commit();
+        User u = userDao.find(1);
+        assertEquals(user1, u);
+    }
+
+    @Test
+    public void testUpdateUser() throws Exception {
+        user1 = new User("User", "www.user1.org");
+        tx.begin();
+        userDao.create(user1);
+        tx.commit();
+        user1.setUrl("www.UpdateUser.nl");
+        userDao.updateUser(user1);
+        User u = userDao.find(1);
+        assertEquals(user1, u);
+    }
 }

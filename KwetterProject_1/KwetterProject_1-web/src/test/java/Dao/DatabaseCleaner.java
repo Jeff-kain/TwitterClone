@@ -1,47 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dao;
 
 import Domain.Heart;
 import Domain.Kweet;
 import Domain.User;
+import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 
-/**
- *
- * @author jeffrey
- */
+
 public class DatabaseCleaner {
+
     private static final Class<?>[] ENTITY_TYPES = {
-        Kweet.class,
-        User.class
+        Heart.class,
+        User.class,
+        Kweet.class
     };
-    
     private final EntityManager em;
 
     public DatabaseCleaner(EntityManager entityManager) {
         em = entityManager;
     }
 
-    public void clean() {
+    public void clean() throws SQLException {
         em.getTransaction().begin();
 
         for (Class<?> entityType : ENTITY_TYPES) {
             deleteEntities(entityType);
         }
         em.getTransaction().commit();
+        em.close();
     }
 
     private void deleteEntities(Class<?> entityType) {
         em.createQuery("delete from " + getEntityName(entityType)).executeUpdate();
     }
 
-    protected String getEntityName(Class<?> model) {
-        EntityType et = em.getMetamodel().entity(model);
+    protected String getEntityName(Class<?> clazz) {
+        EntityType et = em.getMetamodel().entity(clazz);
         return et.getName();
     }
 }

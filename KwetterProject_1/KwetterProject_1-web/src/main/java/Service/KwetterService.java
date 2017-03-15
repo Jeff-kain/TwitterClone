@@ -70,13 +70,13 @@ public class KwetterService {
         try {
             userDAO.updateUser(follower);
         } catch (KwetterException e) {
-            throw new UserException("Can't update user", e);
+            throw new UserException("Can't follow user", e);
         }
 
     }
 
-    public User find(String username) {
-        return userDAO.find(username);
+    public User find(int id) {
+        return userDAO.find(id);
     }
     
     public User findUser(String username) {
@@ -113,7 +113,7 @@ public class KwetterService {
         try {
             userDAO.updateUser(follower);
         } catch (KwetterException e) {
-            throw new UserException("Can't update user", e);
+            throw new UserException("Can't unfollow user", e);
         }
     }
 

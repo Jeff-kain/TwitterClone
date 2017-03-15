@@ -26,6 +26,10 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
         super(Kweet.class);
     }
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;

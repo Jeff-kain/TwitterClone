@@ -1,3 +1,4 @@
-Service\KwetterServiceTest.class
 Dao\UserDaoJPATest.class
+Dao\KweetDaoJPATest.class
+Service\KwetterServiceTest.class
 Dao\DatabaseCleaner.class
