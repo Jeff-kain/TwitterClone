@@ -120,4 +120,8 @@ public class KwetterService {
     public void createKweet(Kweet kweet) {
         kwetterDAO.createKweet(kweet);
     }
+    
+    public void removeKweet(String userName, int kweetid) { 
+        kwetterDAO.removeKweet(userName, kweetid);
+    }
 }

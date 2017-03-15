@@ -7,6 +7,7 @@ package Dao;
 
 import Domain.Kweet;
 import Domain.User;
+import Exceptions.KwetterException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
@@ -38,6 +39,17 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
     @Override
     public void createKweet(Kweet kweet) {
         em.persist(kweet);
+    }
+
+    @Override
+    public void removeKweet(String userName, int kweetid) {
+        Kweet k = find(kweetid);
+        em.remove(k);
+    }
+
+    @Override
+    public Kweet find(int kweetid) {
+        return em.find(Kweet.class, kweetid);
     }
 
     @Override

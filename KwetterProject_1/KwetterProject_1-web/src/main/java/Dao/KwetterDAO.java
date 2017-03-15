@@ -7,6 +7,7 @@ package Dao;
 
 import Domain.Kweet;
 import Domain.User;
+import Exceptions.KwetterException;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public interface KwetterDAO {
 
     void createKweet(Kweet kweet);
 
+    void removeKweet(String userName, int kweetid) ;
+
     boolean removeFollowing(User invokingUser, User targetUser);
 
     boolean addFollowing(User invokingUser, User targetedUser);
@@ -24,6 +27,8 @@ public interface KwetterDAO {
     List getKweetsByUser(String userName);
 
     List findAllKweets();
+    
+    Kweet find(int kweetid);
 
     List findRecentKweets(String userName);
 }

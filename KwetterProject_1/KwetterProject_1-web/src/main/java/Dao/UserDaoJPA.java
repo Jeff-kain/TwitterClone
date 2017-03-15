@@ -62,7 +62,6 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     @Override
     public User find(int id) {
         return em.find(User.class, id);
-
     }
 
     @Override

@@ -61,10 +61,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase classname="Service.KwetterServiceTest" name="testEditUser" time="0.014"/>
-  <testcase classname="Service.KwetterServiceTest" name="testCreateKweet" time="0.001"/>
+  <testcase classname="Service.KwetterServiceTest" name="testEditUser" time="0.013"/>
+  <testcase classname="Service.KwetterServiceTest" name="testCreateKweet" time="0"/>
   <testcase classname="Service.KwetterServiceTest" name="testRegisterUser" time="0"/>
-  <testcase classname="Service.KwetterServiceTest" name="testUnfollowUser" time="0"/>
+  <testcase classname="Service.KwetterServiceTest" name="testUnfollowUser" time="0.001"/>
   <testcase classname="Service.KwetterServiceTest" name="testFollowUser" time="0"/>
   <testcase classname="Service.KwetterServiceTest" name="testGetFollowers" time="0"/>
 </testsuite>

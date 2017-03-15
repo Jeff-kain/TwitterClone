@@ -107,4 +107,11 @@ public class KwetterRestApi {
         }
         return Response.serverError().build();
     }
+    
+    @DELETE
+    @Path("/{userName}/{kweet}")
+    public Response deleteKweet(@PathParam("userName")String userName, @PathParam("kweet") int kweetId) {
+        kwetterService.removeKweet(userName,kweetId);
+        return Response.ok().build();
+    }
 }
