@@ -79,7 +79,7 @@ public class Startup {
             service.followUser(u2, u);
             // service.followUser(u, u2);
             service.followUser(u3, u);
-            service.followUser(u, u3);
+            service.followUser(u, u2);
             service.followUser(u3, u2);
         } catch (UserException e) {
             e.printStackTrace();

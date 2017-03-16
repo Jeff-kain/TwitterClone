@@ -41,6 +41,12 @@ public class KwetterService {
         userDAO = dao;
     }
 
+    /**
+     * register a user
+     *
+     * @param user
+     * @throws UserException
+     */
     public void registerUser(User user) throws UserException {
         try {
             userDAO.createUser(user);
@@ -49,6 +55,12 @@ public class KwetterService {
         }
     }
 
+    /**
+     * Update user info
+     *
+     * @param user
+     * @throws UserException
+     */
     public void updateUser(User user) throws UserException {
         try {
             userDAO.updateUser(user);
@@ -57,6 +69,12 @@ public class KwetterService {
         }
     }
 
+    /**
+     * remove a user
+     *
+     * @param user
+     * @throws UserException
+     */
     public void removeUser(User user) throws UserException {
         try {
             userDAO.updateUser(user);
@@ -65,6 +83,13 @@ public class KwetterService {
         }
     }
 
+    /**
+     * Follow a user
+     *
+     * @param follower
+     * @param followee
+     * @throws UserException
+     */
     public void followUser(User follower, User followee) throws UserException {
         follower.addFollower(followee);
         try {
@@ -75,39 +100,87 @@ public class KwetterService {
 
     }
 
+    /**
+     * Find a user by id
+     *
+     * @param id
+     * @return user
+     */
     public User find(int id) {
         return userDAO.find(id);
     }
-    
+
+    /**
+     * Find a user by username
+     *
+     * @param username
+     * @return user
+     */
     public User findUser(String username) {
         return userDAO.findUser(username);
     }
 
-    public List getFollowers(String userName) {
+    /**
+     * Get a list of followers
+     *
+     * @param userName
+     * @return followers
+     */
+    public List<User> getFollowers(String userName) {
         return userDAO.getFollowers(userName);
     }
 
-    public List getFollowing(String userName) {
+    /**
+     * Get a list of users u are following
+     *
+     * @param userName
+     * @return following
+     */
+    public List<User> getFollowing(String userName) {
         return userDAO.getFollowing(userName);
     }
 
-    public List findAll() {
+    /**
+     * Get a list of all users
+     * @return users
+     */
+    public List<User> findAll() {
         List allUsers = userDAO.findAllUsers();
         return allUsers;
     }
-
-    public List findAllKweets() {
+    
+    /**
+     * Get a list of all kweets
+     * @return kweets
+     */
+    public List<Kweet> findAllKweets() {
         return kwetterDAO.findAllKweets();
     }
 
-    public List findRecentKweets(String userName) {
+    /**
+     * Get a list of all recent kweets
+     * @param userName
+     * @return 
+     */
+    public List<Kweet> findRecentKweets(String userName) {
         return kwetterDAO.findRecentKweets(userName);
     }
 
-    public List findKweetsByUser(String userName) {
+    /**
+     * Get a list of all kweets posted by a user
+     * @param userName
+     * @return kweets
+     */
+    public List<User> findKweetsByUser(String userName) {
         return kwetterDAO.getKweetsByUser(userName);
     }
 
+    /**
+     * Unfollow a user
+     * @param follower
+     * @param followee
+     * @throws UserException 
+     */
     public void unfollowUser(User follower, User followee) throws UserException {
         follower.removeFollower(followee);
         try {
@@ -116,12 +189,21 @@ public class KwetterService {
             throw new UserException("Can't unfollow user", e);
         }
     }
-
+    
+    /**
+     * Create a kweet
+     * @param kweet 
+     */
     public void createKweet(Kweet kweet) {
         kwetterDAO.createKweet(kweet);
     }
-    
-    public void removeKweet(String userName, int kweetid) { 
+
+    /**
+     * Remove a kweet
+     * @param userName
+     * @param kweetid 
+     */
+    public void removeKweet(String userName, int kweetid) {
         kwetterDAO.removeKweet(userName, kweetid);
     }
 }

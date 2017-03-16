@@ -5,11 +5,14 @@
  */
 package Domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,7 +22,7 @@ import javax.persistence.*;
     @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE userName =:userName")
     ,
 
-    @NamedQuery(name = "User.findAllUsers", query = "SELECT u.id, u.url, u.userName FROM User u")
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u")
     ,
     @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)")
     ,
@@ -35,10 +38,8 @@ public class User implements Serializable {
     private String userName;
     @Column(name = "url")
     private String url;
-//    @OneToMany(fetch=FetchType.LAZY, mappedBy="id", cascade = {CascadeType.PERSIST})
-//    private List<User> following;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER )
     private List<Kweet> kweets;
 
     @JoinTable(name = "follower", joinColumns = {
@@ -46,13 +47,10 @@ public class User implements Serializable {
     }, inverseJoinColumns = {
         @JoinColumn(name = "following_id")
     })
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,  cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<User> following = new ArrayList();
-    @ManyToMany(mappedBy = "following")
-    private List<User> followers;
-    
-//    @OneToMany(mappedBy = "user")
-//    private List<Heart> hearts;
+    @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER,  cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<User> followers = new ArrayList();
 
     public User(String userName, String url) {
         this.userName = userName;
@@ -86,10 +84,12 @@ public class User implements Serializable {
         this.url = url;
     }
 
+    @XmlTransient
     public List<User> getFollowing() {
         return following;
     }
-
+    
+    @XmlTransient
     public List<User> getFollowers() {
         return followers;
     }
@@ -97,7 +97,7 @@ public class User implements Serializable {
     public void addFollower(User follow) {
         this.following.add(follow);
     }
-
+    
     public void removeFollower(User follow) {
         this.following.remove(follow);
     }
@@ -106,6 +106,7 @@ public class User implements Serializable {
         this.kweets.add(kweet);
     }
 
+    @XmlTransient
     public List<Kweet> getKweets() {
         return kweets;
     }

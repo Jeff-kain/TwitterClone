@@ -2,6 +2,7 @@ Domain\Heart.class
 Domain\Heart_.class
 Dao\UserDAO.class
 Rest\KwetterRestApplication.class
+Dao\UserDaoCollImpl.class
 Dao\UserDaoJPA.class
 Domain\Kweet.class
 Service\Startup.class
@@ -12,6 +13,7 @@ Domain\User_.class
 Dao\DaoFacade.class
 Dao\JPA.class
 Domain\User.class
+Dao\KwetterDaoCollImpl.class
 Domain\Kweet_.class
 Exceptions\UserException.class
 Rest\KwetterRestApi.class

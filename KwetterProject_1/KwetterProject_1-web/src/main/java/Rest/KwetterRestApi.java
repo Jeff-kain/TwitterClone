@@ -40,7 +40,7 @@ public class KwetterRestApi {
     @Path("/users")
     @Produces({APPLICATION_JSON})
     public Response getAllUsers() {
-        List users = kwetterService.findAll();
+        final List<User> users = kwetterService.findAll();
         return Response.ok(users).build();
     }
 
@@ -48,7 +48,7 @@ public class KwetterRestApi {
     @Path("/kweets")
     @Produces({APPLICATION_JSON})
     public Response getAllKweets() {
-        List Kweets = kwetterService.findAllKweets();
+        final List<Kweet> Kweets = kwetterService.findAllKweets();
         return Response.ok(Kweets).build();
     }
 
@@ -56,7 +56,7 @@ public class KwetterRestApi {
     @Path("/{userName}/kweets/recent")
     @Produces({APPLICATION_JSON})
     public Response getRecentKweets(@PathParam("userName") String userName) {
-        List Kweets = kwetterService.findRecentKweets(userName);
+        final List<Kweet> Kweets = kwetterService.findRecentKweets(userName);
         return Response.ok(Kweets).build();
     }
 
@@ -64,7 +64,7 @@ public class KwetterRestApi {
     @Path("/{userName}/followers")
     @Produces({APPLICATION_JSON})
     public Response getFollowers(@PathParam("userName") String userName) {
-        List followers = kwetterService.getFollowers(userName);
+        final List<User> followers = kwetterService.getFollowers(userName);
         return Response.ok(followers).build();
     }
 
@@ -72,7 +72,7 @@ public class KwetterRestApi {
     @Path("/{userName}/following")
     @Produces({APPLICATION_JSON})
     public Response getFollowing(@PathParam("userName") String userName) {
-        List followers = kwetterService.getFollowing(userName);
+        final List<User> followers = kwetterService.getFollowing(userName);
         return Response.ok(followers).build();
     }
 
@@ -80,7 +80,7 @@ public class KwetterRestApi {
     @Path("/{userName}/kweets")
     @Produces({APPLICATION_JSON})
     public Response getKweetsByUser(@PathParam("userName") String userName) {
-        final List KweetsByUser = kwetterService.findKweetsByUser(userName);
+        final List<User> KweetsByUser = kwetterService.findKweetsByUser(userName);
         return Response.ok(KweetsByUser).build();
     }
 
@@ -107,6 +107,7 @@ public class KwetterRestApi {
         }
         return Response.serverError().build();
     }
+    
     
     @DELETE
     @Path("/{userName}/{kweet}")
