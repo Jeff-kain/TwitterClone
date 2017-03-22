@@ -20,10 +20,6 @@ public interface KwetterDAO {
 
     void removeKweet(String userName, int kweetid) ;
 
-    boolean removeFollowing(User invokingUser, User targetUser);
-
-    boolean addFollowing(User invokingUser, User targetedUser);
-
     List getKweetsByUser(String userName);
 
     List findAllKweets();

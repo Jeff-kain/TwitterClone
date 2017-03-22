@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -83,6 +84,7 @@ public class Kweet implements Serializable {
         this.content = content;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public GregorianCalendar getDate() {
         return postDate;
     }

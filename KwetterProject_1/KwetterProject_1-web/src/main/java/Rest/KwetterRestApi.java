@@ -9,6 +9,7 @@ import Domain.Kweet;
 import Domain.User;
 import Exceptions.UserException;
 import Service.KwetterService;
+import io.swagger.annotations.Api;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +24,9 @@ import javax.ws.rs.core.Response;
  *
  * @author jeffrey
  */
+@Api(value = "Kwetter")
 @Path("/kwetter-api")
+@Produces({APPLICATION_JSON})
 public class KwetterRestApi {
 
     @Inject
@@ -38,7 +41,6 @@ public class KwetterRestApi {
 
     @GET
     @Path("/users")
-    @Produces({APPLICATION_JSON})
     public Response getAllUsers() {
         final List<User> users = kwetterService.findAll();
         return Response.ok(users).build();
@@ -46,7 +48,6 @@ public class KwetterRestApi {
 
     @GET
     @Path("/kweets")
-    @Produces({APPLICATION_JSON})
     public Response getAllKweets() {
         final List<Kweet> Kweets = kwetterService.findAllKweets();
         return Response.ok(Kweets).build();
@@ -54,7 +55,6 @@ public class KwetterRestApi {
 
     @GET
     @Path("/{userName}/kweets/recent")
-    @Produces({APPLICATION_JSON})
     public Response getRecentKweets(@PathParam("userName") String userName) {
         final List<Kweet> Kweets = kwetterService.findRecentKweets(userName);
         return Response.ok(Kweets).build();
@@ -62,7 +62,6 @@ public class KwetterRestApi {
 
     @GET
     @Path("/{userName}/followers")
-    @Produces({APPLICATION_JSON})
     public Response getFollowers(@PathParam("userName") String userName) {
         final List<User> followers = kwetterService.getFollowers(userName);
         return Response.ok(followers).build();
@@ -70,7 +69,6 @@ public class KwetterRestApi {
 
     @GET
     @Path("/{userName}/following")
-    @Produces({APPLICATION_JSON})
     public Response getFollowing(@PathParam("userName") String userName) {
         final List<User> followers = kwetterService.getFollowing(userName);
         return Response.ok(followers).build();
@@ -78,7 +76,6 @@ public class KwetterRestApi {
 
     @GET
     @Path("/{userName}/kweets")
-    @Produces({APPLICATION_JSON})
     public Response getKweetsByUser(@PathParam("userName") String userName) {
         final List<User> KweetsByUser = kwetterService.findKweetsByUser(userName);
         return Response.ok(KweetsByUser).build();
@@ -89,11 +86,11 @@ public class KwetterRestApi {
     @Consumes(TEXT_PLAIN)
     public Response postKweet(@PathParam("userName") String userName, String content) {
         User user = kwetterService.findUser(userName);
-        Kweet kweet = new Kweet(content,user);
+        Kweet kweet = new Kweet(content, user);
         kwetterService.createKweet(kweet);
         return Response.ok().build();
     }
-    
+
     @POST
     @Path("{userName}/addfollowing/{followee}")
     public Response postAddFollowing(@PathParam("userName") String userName, @PathParam("followee") String userNameFollowee) {
@@ -107,12 +104,11 @@ public class KwetterRestApi {
         }
         return Response.serverError().build();
     }
-    
-    
+
     @DELETE
     @Path("/{userName}/{kweet}")
-    public Response deleteKweet(@PathParam("userName")String userName, @PathParam("kweet") int kweetId) {
-        kwetterService.removeKweet(userName,kweetId);
+    public Response deleteKweet(@PathParam("userName") String userName, @PathParam("kweet") int kweetId) {
+        kwetterService.removeKweet(userName, kweetId);
         return Response.ok().build();
     }
 }

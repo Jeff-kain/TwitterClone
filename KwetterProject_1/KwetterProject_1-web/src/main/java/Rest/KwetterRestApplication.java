@@ -12,6 +12,8 @@ package Rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import org.shipstone.swagger.integration.annotation.SwaggerUIConfiguration;
 
-@ApplicationPath("/rest")
+@SwaggerUIConfiguration
+@ApplicationPath("rest")
 public class KwetterRestApplication extends Application {}

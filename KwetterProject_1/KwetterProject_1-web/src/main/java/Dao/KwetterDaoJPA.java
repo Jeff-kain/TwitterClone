@@ -72,32 +72,32 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
      * @param targetedUser
      * @return boolean
      */
-    @Override
-    public boolean addFollowing(User invokingUser, User targetedUser) {
-        targetedUser.getFollowers().add(invokingUser);
-        invokingUser.getFollowing().add(targetedUser);
-
-        em.merge(invokingUser);
-        em.merge(targetedUser);
-        return true;
-    }
-
-    /**
-     * remove a follower of a user and change it in the database
-     * @param invokingUser
-     * @param targetUser
-     * @return boolean
-     */
-    @Override
-    public boolean removeFollowing(User invokingUser, User targetUser) {
-        targetUser.getFollowers().remove(invokingUser);
-        invokingUser.getFollowing().remove(targetUser);
-
-        em.merge(invokingUser);
-        em.merge(targetUser);
-
-        return true;
-    }
+//    @Override
+//    public boolean addFollowing(User invokingUser, User targetedUser) {
+//        targetedUser.getFollowers().add(invokingUser);
+//        invokingUser.getFollowing().add(targetedUser);
+//
+//        em.merge(invokingUser);
+//        em.merge(targetedUser);
+//        return true;
+//    }
+//
+//    /**
+//     * remove a follower of a user and change it in the database
+//     * @param invokingUser
+//     * @param targetUser
+//     * @return boolean
+//     */
+//    @Override
+//    public boolean removeFollowing(User invokingUser, User targetUser) {
+//        targetUser.getFollowers().remove(invokingUser);
+//        invokingUser.getFollowing().remove(targetUser);
+//
+//        em.merge(invokingUser);
+//        em.merge(targetUser);
+//
+//        return true;
+//    }
 
     /** 
      * Get a list of kweets by user

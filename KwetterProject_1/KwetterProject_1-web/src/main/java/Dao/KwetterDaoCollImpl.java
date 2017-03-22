@@ -7,40 +7,51 @@ package Dao;
 
 import Domain.Kweet;
 import Domain.User;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
  * @author jeffrey
  */
 public class KwetterDaoCollImpl implements KwetterDAO {
-    Set<Kweet> kweets = new HashSet();
+
+    CopyOnWriteArrayList<Kweet> kweets = new CopyOnWriteArrayList<>();
 
     @Override
     public void createKweet(Kweet kweet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        kweets.add(kweet);
     }
 
     @Override
     public void removeKweet(String userName, int kweetid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean removeFollowing(User invokingUser, User targetUser) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean addFollowing(User invokingUser, User targetedUser) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Kweet kweet = find(kweetid);
+        if (kweet != null) {
+            kweets.remove(kweet);
+        }
     }
 
     @Override
     public List getKweetsByUser(String userName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Kweet> userKweets = new ArrayList<>();
+
+        for (Kweet kweet : kweets) {
+            if (kweet.getOwner().getUserName() == userName) {
+                userKweets.add(kweet);
+            }
+        }
+        Collections.sort(userKweets, new Comparator<Kweet>() {
+            @Override
+            public int compare(Kweet kweet1, Kweet kweet) {
+                return kweet.getDate().compareTo(kweet1.getDate());
+            }
+        });
+        return userKweets;
     }
 
     @Override
@@ -55,8 +66,21 @@ public class KwetterDaoCollImpl implements KwetterDAO {
 
     @Override
     public List findRecentKweets(String userName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+        List<Kweet> userKweets = new ArrayList<>();
+
+        for (Kweet kweet : kweets) {
+            if (kweet.getOwner().getUserName()== userName) {
+                if(userKweets.size() < 11) {
+                    userKweets.add(kweet);
+                }
+            }
+        }
+        Collections.sort(userKweets, new Comparator<Kweet>() {
+            @Override
+            public int compare(Kweet kweet1, Kweet kweet) {
+                return kweet.getDate().compareTo(kweet1.getDate());
+            }
+        });
+        return userKweets;    }
+
 }
