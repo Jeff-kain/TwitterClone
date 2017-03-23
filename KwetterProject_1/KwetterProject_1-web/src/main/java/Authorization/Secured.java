@@ -9,6 +9,7 @@ package Authorization;
  *
  * @author jeffrey
  */
+import Utils.PermissionsEnum;
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -24,4 +25,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 public @interface Secured {
+     PermissionsEnum[] value() default {};
 }

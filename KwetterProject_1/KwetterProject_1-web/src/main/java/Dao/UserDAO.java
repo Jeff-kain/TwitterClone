@@ -7,6 +7,7 @@ package Dao;
 
 import Domain.User;
 import Exceptions.KwetterException;
+import Utils.PermissionsEnum;
 import java.util.List;
 
 /**
@@ -26,8 +27,10 @@ public interface UserDAO {
     List findAllUsers();
 
     User find(int id);
-    
+
     List<User> getFollowing(String userName);
 
     List getFollowers(String userName);
+
+    PermissionsEnum getUserPermission(String username);
 }

@@ -8,7 +8,7 @@ package Service;
 import Dao.UserDAO;
 import Domain.Token;
 import Domain.User;
-import Exception.AuthenticationException;
+import Exceptions.AuthenticationException;
 import Utils.AuthState;
 import java.util.Date;
 import javax.ejb.Stateless;

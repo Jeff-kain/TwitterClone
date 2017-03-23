@@ -9,7 +9,7 @@ package Utils;
  *
  * @author jeffrey
  */
-import Exception.AuthenticationException;
+import Exceptions.AuthenticationException;
 import Domain.Token;
 
 import javax.ejb.Singleton;

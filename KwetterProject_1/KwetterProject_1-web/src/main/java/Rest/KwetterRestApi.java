@@ -5,10 +5,12 @@
  */
 package Rest;
 
+import Authorization.Secured;
 import Domain.Kweet;
 import Domain.User;
 import Exceptions.UserException;
 import Service.KwetterService;
+import Utils.PermissionsEnum;
 import io.swagger.annotations.Api;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +43,7 @@ public class KwetterRestApi {
 
     @GET
     @Path("/users")
+    @Secured(PermissionsEnum.ADMIN)
     public Response getAllUsers() {
         final List<User> users = kwetterService.findAll();
         return Response.ok(users).build();

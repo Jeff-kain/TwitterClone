@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -91,4 +92,39 @@ public class UserDaoJPATest {
         User u = userDao.find(1);
         assertEquals(user1, u);
     }
+    @Test 
+    public void testFollowUser()
+    {
+         user1 = new User("User", "www.user1.org");
+         User user2 = new User("User2","www.user2.org");
+         tx.begin();
+         userDao.create(user1);
+         userDao.create(user2);
+         user1.addFollower(user2);
+         User stub = userDao.findUser("User");
+         User stub2 = userDao.findUser("User2");
+         tx.commit();
+         assertThat(stub.getFollowers().contains(stub2),is(stub2.getFollowing().contains(stub)));    
+    }
+    
+      @Test 
+    public void testUnFollowUser()
+    {
+         user1 = new User("User", "www.user1.org");
+         User user2 = new User("User2","www.user2.org");
+         tx.begin();
+         userDao.create(user1);
+         userDao.create(user2);
+         user1.addFollower(user2);
+         User stub = userDao.findUser("User");
+         User stub2 = userDao.findUser("User2");
+         tx.commit();
+         assertThat(stub.getFollowers().contains(stub2),is(stub2.getFollowing().contains(stub)));    
+         tx.begin();
+         user1.removeFollower(user2);
+         tx.commit();
+         assertThat(stub.getFollowers().size(), is(0));
+    }
+    
+    
 }

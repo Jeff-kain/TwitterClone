@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import Utils.PermissionsEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class User implements Serializable {
     @Column(name = "url")
     private String url;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Kweet> kweets;
 
     @JoinTable(name = "follower", joinColumns = {
@@ -47,10 +48,20 @@ public class User implements Serializable {
     }, inverseJoinColumns = {
         @JoinColumn(name = "following_id")
     })
-    @ManyToMany(fetch = FetchType.EAGER,  cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<User> following = new ArrayList();
-    @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER,  cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<User> followers = new ArrayList();
+
+    private PermissionsEnum permission;
+
+    public PermissionsEnum getPermission() {
+        return permission;
+    }
+
+    public void setPermission(PermissionsEnum permission) {
+        this.permission = permission;
+    }
 
     public User(String userName, String url) {
         this.userName = userName;
@@ -88,7 +99,7 @@ public class User implements Serializable {
     public List<User> getFollowing() {
         return following;
     }
-    
+
     @XmlTransient
     public List<User> getFollowers() {
         return followers;
@@ -97,7 +108,7 @@ public class User implements Serializable {
     public void addFollower(User follow) {
         this.following.add(follow);
     }
-    
+
     public void removeFollower(User follow) {
         this.following.remove(follow);
     }

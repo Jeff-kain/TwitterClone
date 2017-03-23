@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 /**
  *
@@ -107,4 +108,25 @@ public class KweetDaoJPATest {
         kweets = kwetterDao.getKweetsByUser("User").size();
         assertEquals(kweets, 0);
     }
+
+    @Test
+    public void testUpdateKweet() throws Exception {
+        user1 = new User("User", "www.user1.org");
+        tx.begin();
+        userDao.create(user1);
+        tx.commit();
+        kweet1 = new Kweet("test1", user1);
+        tx.begin();
+        kwetterDao.createKweet(kweet1);
+        tx.commit();
+        int kweets = kwetterDao.getKweetsByUser("User").size();
+        assertEquals(kweets, 1);
+        kweet1.setContent("updated kweet");
+        tx.begin();
+        kwetterDao.edit(kweet1);
+        Kweet stub = kwetterDao.find(kweet1.getId());
+        tx.commit();
+        assertThat(kweet1, is(stub));
+    }
+
 }
