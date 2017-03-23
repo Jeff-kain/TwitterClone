@@ -35,13 +35,6 @@ public class KwetterRestApi {
     private KwetterService kwetterService;
 
     @GET
-    @Path("/test")
-    @Produces("text/html")
-    public String getHtml() {
-        return "<html lang=\"en\"><body><h1>Hello, World!!</body></h1></html>";
-    }
-
-    @GET
     @Path("/users")
     @Secured(PermissionsEnum.ADMIN)
     public Response getAllUsers() {

@@ -1,6 +1,5 @@
 package Dao;
 
-import Domain.Heart;
 import Domain.Kweet;
 import Domain.User;
 import java.sql.SQLException;
@@ -11,7 +10,6 @@ import javax.persistence.metamodel.EntityType;
 public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
-        Heart.class,
         User.class,
         Kweet.class
     };

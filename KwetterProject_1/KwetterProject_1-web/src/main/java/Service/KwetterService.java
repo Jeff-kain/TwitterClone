@@ -97,7 +97,6 @@ public class KwetterService {
         } catch (KwetterException e) {
             throw new UserException("Can't follow user", e);
         }
-
     }
 
     /**
