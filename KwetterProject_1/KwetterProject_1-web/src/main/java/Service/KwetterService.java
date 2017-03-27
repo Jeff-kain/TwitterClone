@@ -30,17 +30,17 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 public class KwetterService {
-
+    
     @Inject
     private KwetterDAO kwetterDAO;
-
+    
     @Inject
     private UserDAO userDAO;
-
+    
     public void setKwetterDAO(KwetterDAO dao) {
         kwetterDAO = dao;
     }
-
+    
     public void setuserDAO(UserDAO dao) {
         userDAO = dao;
     }
@@ -218,22 +218,22 @@ public class KwetterService {
     public void removeKweet(String userName, int kweetid) {
         kwetterDAO.removeKweet(userName, kweetid);
     }
-
+    
     public void addMentions(Kweet kweet) {
         List<String> mentions = KwetterTag.findTags('@', kweet.getContent());
         for (String mention : mentions) {
-            User user = userDAO.findUser(mention);
+            User user = findUser(mention);
             if (user != null) {
                 user.addMention(kweet);
                 try {
-                    userDAO.updateUser(user);
-                } catch (KwetterException ex) {
+                    updateUser(user);
+                } catch (UserException ex) {
                     Logger.getLogger(KwetterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
-
+    
     public void addHashtags(Kweet kweet) {
         List<String> tags = KwetterTag.findTags('#', kweet.getContent());
         List<String> trends = new ArrayList<>();

@@ -53,8 +53,8 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<User> followers = new ArrayList();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Kweet> mentions;
+    @OneToMany
+    private List<Kweet> mentions = new ArrayList<>();
 
     private PermissionsEnum permission;
 

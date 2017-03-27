@@ -57,17 +57,6 @@ public class Startup {
         Kweet k9 = new Kweet("yo9", u);
         Kweet k10 = new Kweet("yo10", u);
         Kweet k11 = new Kweet("yo11", u);
-        service.createKweet(k1);
-        service.createKweet(k2);
-        service.createKweet(k3);
-        service.createKweet(k4);
-        service.createKweet(k5);
-        service.createKweet(k6);
-        service.createKweet(k7);
-        service.createKweet(k8);
-        service.createKweet(k9);
-        service.createKweet(k10);
-        service.createKweet(k11);
 //        u1.addKweet(k2);
 //        u1.addKweet(k1);
 
@@ -84,8 +73,19 @@ public class Startup {
             service.followUser(u3, u2);
         } catch (UserException e) {
             e.printStackTrace();
-            
+
         }
-        
+        service.createKweet(k1);
+        service.createKweet(k2);
+        service.createKweet(k3);
+        service.createKweet(k4);
+        service.createKweet(k5);
+        service.createKweet(k6);
+        service.createKweet(k7);
+        service.createKweet(k8);
+        service.createKweet(k9);
+        service.createKweet(k10);
+        service.createKweet(k11);
+
     }
 }
