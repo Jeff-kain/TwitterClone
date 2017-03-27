@@ -17,6 +17,8 @@ import java.util.List;
 public interface KwetterDAO {
 
     void createKweet(Kweet kweet);
+    
+    void updateKweet(Kweet kweet);
 
     void removeKweet(String userName, int kweetid) ;
 

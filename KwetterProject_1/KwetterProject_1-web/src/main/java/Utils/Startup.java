@@ -46,7 +46,7 @@ public class Startup {
         User u2 = new User("Bob", "Bob.nl");
         User u3 = new User("Goku", "Goku.nl");
 
-        Kweet k1 = new Kweet("Yo @Bob #slechtekweet", u);
+        Kweet k1 = new Kweet("Yo @Bob #JEA", u);
         Kweet k2 = new Kweet("yo2", u);
         Kweet k3 = new Kweet("yo3", u);
         Kweet k4 = new Kweet("yo4", u);

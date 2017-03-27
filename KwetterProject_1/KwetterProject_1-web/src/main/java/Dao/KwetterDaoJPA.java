@@ -19,18 +19,18 @@ import javax.persistence.*;
  */
 @Stateless
 public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
-
+    
     @PersistenceContext(unitName = "KwetterProject_KwetterProject_1-web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
-
+    
     public KwetterDaoJPA() {
         super(Kweet.class);
     }
-
+    
     public void setEm(EntityManager em) {
         this.em = em;
     }
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -38,7 +38,8 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 
     /**
      * Create a kweet and add it to the database
-     * @param kweet 
+     *
+     * @param kweet
      */
     @Override
     public void createKweet(Kweet kweet) {
@@ -47,8 +48,9 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 
     /**
      * remove a kweet from the database
+     *
      * @param userName
-     * @param kweetid 
+     * @param kweetid
      */
     @Override
     public void removeKweet(String userName, int kweetid) {
@@ -58,6 +60,7 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 
     /**
      * find a kweet by id in the databases
+     *
      * @param kweetid
      * @return kweet
      */
@@ -68,6 +71,7 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 
     /**
      * add a follower to a user and add it to the database
+     *
      * @param invokingUser
      * @param targetedUser
      * @return boolean
@@ -98,9 +102,9 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 //
 //        return true;
 //    }
-
-    /** 
+    /**
      * Get a list of kweets by user
+     *
      * @param userName
      * @return kweets
      */
@@ -112,6 +116,7 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 
     /**
      * Get a list of all kweets in the database
+     *
      * @return kweets
      */
     @Override
@@ -123,6 +128,7 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
 
     /**
      * Get a list of all recent kweets by a user
+     *
      * @param username
      * @return kweets
      */
@@ -132,5 +138,10 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
         kweets = em.createNamedQuery("Kweet.findRecentKweets").setParameter("userName", username).setMaxResults(10).getResultList();
         return kweets;
     }
-
+    
+    @Override
+    public void updateKweet(Kweet kweet) {
+        edit(kweet);
+    }
+    
 }

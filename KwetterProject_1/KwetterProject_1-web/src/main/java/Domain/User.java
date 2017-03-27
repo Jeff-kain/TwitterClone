@@ -40,7 +40,7 @@ public class User implements Serializable {
     @Column(name = "url")
     private String url;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Kweet> kweets;
 
     @JoinTable(name = "follower", joinColumns = {
@@ -53,7 +53,18 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<User> followers = new ArrayList();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Kweet> mentions;
+
     private PermissionsEnum permission;
+
+    public List<Kweet> getMentions() {
+        return mentions;
+    }
+
+    public void addMention(Kweet kweet) {
+        this.mentions.add(kweet);
+    }
 
     public PermissionsEnum getPermission() {
         return permission;

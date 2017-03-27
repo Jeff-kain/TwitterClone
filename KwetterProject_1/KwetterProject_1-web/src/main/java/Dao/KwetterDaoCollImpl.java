@@ -83,4 +83,9 @@ public class KwetterDaoCollImpl implements KwetterDAO {
         });
         return userKweets;    }
 
+    @Override
+    public void updateKweet(Kweet kweet) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

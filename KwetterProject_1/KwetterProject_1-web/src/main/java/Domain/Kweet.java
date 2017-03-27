@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -58,6 +60,18 @@ public class Kweet implements Serializable {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
+
+    @ElementCollection
+    @CollectionTable(name = "TRENDS")
+    private List<String> trends;
+
+    public List<String> getTrends() {
+        return trends;
+    }
+
+    public void setTrends(List<String> trends) {
+        this.trends = trends;
+    }
 
     public Kweet() {
     }

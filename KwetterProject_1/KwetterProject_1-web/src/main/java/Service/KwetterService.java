@@ -12,7 +12,11 @@ import Domain.Kweet;
 import Domain.User;
 import Exceptions.KwetterException;
 import Exceptions.UserException;
+import Utils.KwetterTag;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -141,15 +145,17 @@ public class KwetterService {
 
     /**
      * Get a list of all users
+     *
      * @return users
      */
     public List<User> findAll() {
         List allUsers = userDAO.findAllUsers();
         return allUsers;
     }
-    
+
     /**
      * Get a list of all kweets
+     *
      * @return kweets
      */
     public List<Kweet> findAllKweets() {
@@ -158,8 +164,9 @@ public class KwetterService {
 
     /**
      * Get a list of all recent kweets
+     *
      * @param userName
-     * @return 
+     * @return
      */
     public List<Kweet> findRecentKweets(String userName) {
         return kwetterDAO.findRecentKweets(userName);
@@ -167,6 +174,7 @@ public class KwetterService {
 
     /**
      * Get a list of all kweets posted by a user
+     *
      * @param userName
      * @return kweets
      */
@@ -176,9 +184,10 @@ public class KwetterService {
 
     /**
      * Unfollow a user
+     *
      * @param follower
      * @param followee
-     * @throws UserException 
+     * @throws UserException
      */
     public void unfollowUser(User follower, User followee) throws UserException {
         follower.removeFollower(followee);
@@ -188,21 +197,51 @@ public class KwetterService {
             throw new UserException("Can't unfollow user", e);
         }
     }
-    
+
     /**
      * Create a kweet
-     * @param kweet 
+     *
+     * @param kweet
      */
     public void createKweet(Kweet kweet) {
         kwetterDAO.createKweet(kweet);
+        addHashtags(kweet);
+        addMentions(kweet);
     }
 
     /**
      * Remove a kweet
+     *
      * @param userName
-     * @param kweetid 
+     * @param kweetid
      */
     public void removeKweet(String userName, int kweetid) {
         kwetterDAO.removeKweet(userName, kweetid);
+    }
+
+    public void addMentions(Kweet kweet) {
+        List<String> mentions = KwetterTag.findTags('@', kweet.getContent());
+        for (String mention : mentions) {
+            User user = userDAO.findUser(mention);
+            if (user != null) {
+                user.addMention(kweet);
+                try {
+                    userDAO.updateUser(user);
+                } catch (KwetterException ex) {
+                    Logger.getLogger(KwetterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void addHashtags(Kweet kweet) {
+        List<String> tags = KwetterTag.findTags('#', kweet.getContent());
+        List<String> trends = new ArrayList<>();
+        for (String tag : tags) {
+            tag = tag.toLowerCase();
+            trends.add(tag);
+        }
+        kweet.setTrends(trends);
+        kwetterDAO.updateKweet(kweet);
     }
 }
