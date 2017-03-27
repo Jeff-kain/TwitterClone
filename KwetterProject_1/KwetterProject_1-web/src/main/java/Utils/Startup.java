@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Service;
+package Utils;
 
 import Domain.Kweet;
 import Domain.User;
 import Exceptions.KwetterException;
 import Exceptions.UserException;
+import Service.KwetterService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -45,7 +46,7 @@ public class Startup {
         User u2 = new User("Bob", "Bob.nl");
         User u3 = new User("Goku", "Goku.nl");
 
-        Kweet k1 = new Kweet("Yo", u);
+        Kweet k1 = new Kweet("Yo @Bob #slechtekweet", u);
         Kweet k2 = new Kweet("yo2", u);
         Kweet k3 = new Kweet("yo3", u);
         Kweet k4 = new Kweet("yo4", u);
