@@ -36,7 +36,7 @@ public class KwetterRestApi {
 
     @GET
     @Path("/users")
-    @Secured(PermissionsEnum.ADMIN)
+    //@Secured(PermissionsEnum.ADMIN)
     public Response getAllUsers() {
         final List<User> users = kwetterService.findAll();
         return Response.ok(users).build();
@@ -79,14 +79,15 @@ public class KwetterRestApi {
     @GET
     @Path("/{userName}/kweets")
     public Response getKweetsByUser(@PathParam("userName") String userName) {
-        final List<User> KweetsByUser = kwetterService.findKweetsByUser(userName);
+        final List<Kweet> KweetsByUser = kwetterService.findKweetsByUser(userName);
         return Response.ok(KweetsByUser).build();
     }
 
     @GET
     @Path("/{userName}/mentions") 
     public Response getMentionsByUser(@PathParam("userName") String userName) {
-        return Response.ok().build();
+        final List<Kweet> mentions = kwetterService.findMentions(userName);
+        return Response.ok(mentions).build();
     }
 
     @POST

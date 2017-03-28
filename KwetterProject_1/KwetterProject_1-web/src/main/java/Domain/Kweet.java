@@ -43,8 +43,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Kweet.findRecentKweets", query = "SELECT DISTINCT(k) FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
             + "WHERE userName = :userName) ORDER BY postDate DESC")
-
-})
+    ,
+      // @NamedQuery(name = "Kweet.findMentions", query = "SELECT k FROM Kweet k WHERE k.id IN (SELECT m FROM user_kweet m WHERE m.user_id IN (SELECT u.id FROM User u WHERE userName=:userName))")
+    })
 @Entity
 public class Kweet implements Serializable {
 

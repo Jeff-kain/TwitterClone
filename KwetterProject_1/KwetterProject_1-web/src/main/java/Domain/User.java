@@ -20,14 +20,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE userName =:userName")
-    ,
-
-    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u")
-    ,
-    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)")
-    ,
-    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.userName FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),})
+    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE userName =:userName"),
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
+    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.userName FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
+})
 @Entity
 public class User implements Serializable {
 
@@ -37,7 +34,6 @@ public class User implements Serializable {
     private int id;
     @Column(name = "userName", unique = true)
     private String userName;
-    @Column(name = "url")
     private String url;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -54,10 +50,11 @@ public class User implements Serializable {
     private List<User> followers = new ArrayList();
 
     @OneToMany
-    private List<Kweet> mentions = new ArrayList<>();
+    private List<Kweet> mentions = new ArrayList();
 
     private PermissionsEnum permission;
 
+    @XmlTransient
     public List<Kweet> getMentions() {
         return mentions;
     }

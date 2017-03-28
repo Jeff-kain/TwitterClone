@@ -3,6 +3,7 @@ Dao\UserDAO.class
 Rest\KwetterRestApplication.class
 Dao\UserDaoCollImpl.class
 Exceptions\AuthenticationException.class
+Utils\KwetterTag.class
 Dao\UserDaoJPA.class
 Dao\KwetterDAO.class
 Domain\Token.class
@@ -11,7 +12,6 @@ Dao\KwetterDaoJPA.class
 Authorization\Secured.class
 Utils\Startup.class
 Domain\User.class
-Utils\KwetterTags.class
 Filter\AuthenticationFilter$1.class
 Dao\KwetterDaoCollImpl$1.class
 Filter\CORSFilter.class
@@ -21,9 +21,11 @@ Domain\Kweet.class
 Rest\AuthenticationController.class
 Utils\AuthState.class
 Domain\User_.class
+Bean\LoggedUserBean.class
 Dao\DaoFacade.class
 Dao\JPA.class
 Domain\UserCredentials.class
+Bean\UserBean.class
 Service\AuthorizationServiceImpl.class
 Dao\KwetterDaoCollImpl.class
 Exceptions\PermissionException.class

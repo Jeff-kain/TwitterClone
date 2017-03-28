@@ -162,6 +162,9 @@ public class KwetterService {
         return kwetterDAO.findAllKweets();
     }
 
+    public List<Kweet> findMentions(String userName) {
+        return kwetterDAO.findMentions(userName);
+    }
     /**
      * Get a list of all recent kweets
      *
@@ -178,7 +181,7 @@ public class KwetterService {
      * @param userName
      * @return kweets
      */
-    public List<User> findKweetsByUser(String userName) {
+    public List<Kweet> findKweetsByUser(String userName) {
         return kwetterDAO.getKweetsByUser(userName);
     }
 

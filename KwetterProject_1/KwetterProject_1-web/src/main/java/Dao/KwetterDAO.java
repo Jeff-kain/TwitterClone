@@ -15,12 +15,15 @@ import java.util.List;
  * @author jeffrey
  */
 public interface KwetterDAO {
+    
 
     void createKweet(Kweet kweet);
     
     void updateKweet(Kweet kweet);
 
     void removeKweet(String userName, int kweetid) ;
+    
+    List<Kweet> findMentions(String userName);
 
     List getKweetsByUser(String userName);
 

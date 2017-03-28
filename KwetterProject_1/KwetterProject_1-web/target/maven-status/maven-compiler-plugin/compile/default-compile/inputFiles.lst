@@ -1,15 +1,15 @@
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\KwetterRestApplication.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\AuthenticationException.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\AuthenticationController.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\KwetterTag.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\UserCredentials.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\AuthenticationFilter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\KwetterRestApi.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\PermissionsEnum.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\AuthState.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Service\AuthorizationServiceImpl.java
-C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\KwetterTags.java
-C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\HashtagDaoImpl.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\UserDaoJPA.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Bean\LoggedUserBean.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\DaoFacade.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\KwetterDAO.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\KweetException.java
@@ -18,11 +18,11 @@ C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterPro
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\User.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Service\KwetterService.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\PermissionException.java
-C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\HashtagDAO.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\JPA.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\AuthorizationFilter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\CORSFilter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Service\AuthenticationServiceImpl.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Bean\UserBean.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\Startup.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\KwetterDaoCollImpl.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Kweet.java
@@ -31,4 +31,3 @@ C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterPro
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Token.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\UserException.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\UserDAO.java
-C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Hashtag.java

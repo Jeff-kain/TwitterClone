@@ -19,18 +19,18 @@ import javax.persistence.*;
  */
 @Stateless
 public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
-    
+
     @PersistenceContext(unitName = "KwetterProject_KwetterProject_1-web_war_1.0-SNAPSHOTPU")
     private EntityManager em;
-    
+
     public KwetterDaoJPA() {
         super(Kweet.class);
     }
-    
+
     public void setEm(EntityManager em) {
         this.em = em;
     }
-    
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -126,6 +126,13 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
         return kweets;
     }
 
+    @Override
+    public List<Kweet> findMentions(String userName) {
+        List<Kweet> kweets;
+        kweets = em.createNamedQuery("Kweet.findMentions").setParameter("userName", userName).getResultList();
+        return kweets;
+    }
+
     /**
      * Get a list of all recent kweets by a user
      *
@@ -138,10 +145,10 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
         kweets = em.createNamedQuery("Kweet.findRecentKweets").setParameter("userName", username).setMaxResults(10).getResultList();
         return kweets;
     }
-    
+
     @Override
     public void updateKweet(Kweet kweet) {
         edit(kweet);
     }
-    
+
 }
