@@ -23,8 +23,7 @@ import javax.ws.rs.core.Response;
  */
 @javax.ejb.Startup
 @Singleton
-
-public class Startup {
+public class Initialize {
 
     @Inject
     private KwetterService service;
@@ -35,7 +34,7 @@ public class Startup {
         try {
             this.createData();
         } catch (KwetterException ex) {
-            Logger.getLogger(Startup.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Initialize.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
