@@ -48,6 +48,12 @@ public class KwetterRestApi {
         final List<Kweet> Kweets = kwetterService.findAllKweets();
         return Response.ok(Kweets).build();
     }
+    
+    @GET 
+    @Path("/trends")
+    public Response getTrends() {
+        return Response.ok().build();
+    }
 
     @GET
     @Path("/{userName}/kweets/recent")
@@ -75,6 +81,12 @@ public class KwetterRestApi {
     public Response getKweetsByUser(@PathParam("userName") String userName) {
         final List<User> KweetsByUser = kwetterService.findKweetsByUser(userName);
         return Response.ok(KweetsByUser).build();
+    }
+
+    @GET
+    @Path("/{userName}/mentions") 
+    public Response getMentionsByUser(@PathParam("userName") String userName) {
+        return Response.ok().build();
     }
 
     @POST
