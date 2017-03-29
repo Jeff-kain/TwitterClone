@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "Kweet.findRecentKweets", query = "SELECT DISTINCT(k) FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName) ORDER BY postDate DESC")
+            + "WHERE userName = :userName) ORDER BY postDate DESC"),
         })
 @Entity
 public class Kweet implements Serializable {
@@ -103,7 +103,6 @@ public class Kweet implements Serializable {
         return postDate;
     }
 
-    @XmlTransient
     public User getOwner() {
         return user;
     }

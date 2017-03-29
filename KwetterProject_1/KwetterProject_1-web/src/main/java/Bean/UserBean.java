@@ -19,6 +19,7 @@ import java.util.List;
  *
  * @author jeffrey
  */
+@ManagedBean
 @RequestScoped
 public class UserBean implements Serializable {
 

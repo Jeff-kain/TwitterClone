@@ -91,6 +91,13 @@ public class KwetterRestApi {
         return Response.ok(mentions).build();
     }
 
+    @GET
+    @Path("/trends/{trend}")
+    public Response getKweetsByTrend(@PathParam("trend") String trend) {
+        List<Kweet> trends = kwetterService.findTrendyKweets(trend);
+        return Response.ok(trends).build();
+    }
+
     @POST
     @Path("{userName}/kweets")
     @Consumes(TEXT_PLAIN)

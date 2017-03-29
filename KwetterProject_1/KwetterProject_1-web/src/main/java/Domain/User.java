@@ -67,6 +67,7 @@ public class User implements Serializable {
         this.mentions.add(kweet);
     }
 
+    @XmlTransient
     public PermissionsEnum getPermission() {
         return permission;
     }

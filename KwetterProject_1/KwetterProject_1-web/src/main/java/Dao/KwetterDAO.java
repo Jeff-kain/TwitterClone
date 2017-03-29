@@ -24,6 +24,8 @@ public interface KwetterDAO {
     void removeKweet(String userName, int kweetid) ;
     
     List<Kweet> findMentions(String userName);
+    
+    List<Kweet> findTrendyKweets(String trend);
 
     List getKweetsByUser(String userName);
 

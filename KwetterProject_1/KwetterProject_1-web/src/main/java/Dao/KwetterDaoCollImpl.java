@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 
 /**
  *
@@ -90,6 +92,11 @@ public class KwetterDaoCollImpl implements KwetterDAO {
 
     @Override
     public List<Kweet> findMentions(String userName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Kweet> findTrendyKweets(String trend) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -165,6 +165,19 @@ public class KwetterService {
     public List<Kweet> findMentions(String userName) {
         return kwetterDAO.findMentions(userName);
     }
+    
+    public List<Kweet> findTrendyKweets(String trend) {
+        List<Kweet> kweets = kwetterDAO.findAllKweets();
+        List<Kweet> trendyKweets = new ArrayList();
+        for(Kweet k : kweets) {
+            for(String s : k.getTrends()) {
+                if(s.equals(trend)){
+                    trendyKweets.add(k);
+                }
+            }
+        }
+        return trendyKweets;
+    }
     /**
      * Get a list of all recent kweets
      *

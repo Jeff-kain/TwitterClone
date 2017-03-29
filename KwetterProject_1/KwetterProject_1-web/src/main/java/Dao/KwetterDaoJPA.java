@@ -151,4 +151,11 @@ public class KwetterDaoJPA extends DaoFacade<Kweet> implements KwetterDAO {
         edit(kweet);
     }
 
+    @Override
+    public List<Kweet> findTrendyKweets(String trend) {
+        List<Kweet> kweets;
+        kweets = em.createNamedQuery("Kweet.findByTrend").setParameter("trend", trend).getResultList();
+        return kweets;
+    }
+
 }
