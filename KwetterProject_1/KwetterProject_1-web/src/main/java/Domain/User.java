@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -34,9 +36,10 @@ public class User implements Serializable {
     private int id;
     @Column(name = "userName", unique = true)
     private String userName;
+    @Column(name = "url")
     private String url;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Kweet> kweets;
 
     @JoinTable(name = "follower", joinColumns = {
@@ -49,8 +52,9 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<User> followers = new ArrayList();
 
-    @OneToMany
-    private List<Kweet> mentions = new ArrayList();
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Kweet> mentions = new ArrayList<Kweet>();
 
     private PermissionsEnum permission;
 

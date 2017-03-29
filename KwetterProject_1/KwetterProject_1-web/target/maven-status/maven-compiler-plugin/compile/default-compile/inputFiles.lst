@@ -1,4 +1,5 @@
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\KwetterRestApplication.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\Initialize.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\AuthenticationException.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\AuthenticationController.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\KwetterTag.java
@@ -23,7 +24,6 @@ C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterPro
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\CORSFilter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Service\AuthenticationServiceImpl.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Bean\UserBean.java
-C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\Startup.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\KwetterDaoCollImpl.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Kweet.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\KwetterException.java
