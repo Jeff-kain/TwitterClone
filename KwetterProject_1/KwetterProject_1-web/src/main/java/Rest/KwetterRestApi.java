@@ -87,6 +87,7 @@ public class KwetterRestApi {
     @Path("/{userName}/mentions")
     public Response getMentionsByUser(@PathParam("userName") String userName) {
         User user = kwetterService.findUser(userName);
+        List<Kweet> mentions = user.getMentions();
         return Response.ok(mentions).build();
     }
 
