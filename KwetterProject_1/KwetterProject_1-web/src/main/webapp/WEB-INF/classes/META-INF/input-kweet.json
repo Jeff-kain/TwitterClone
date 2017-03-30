@@ -1,0 +1,54 @@
+{
+    "Kweets": [
+        {
+            "user": "Jeff",
+            "content": "hallootjes",
+            "postDate": "2017-03-29"
+        },
+        {
+            "user": "Frankie",
+            "content": "hallootjes",
+            "postDate": "2017-03-29"
+        },
+        {
+            "user": "Bob",
+            "content": "hallootjes",
+            "postDate": "2017-03-29"
+        },
+        {
+            "user": "Goku",
+            "content": "hallootjes",
+            "postDate": "2017-03-29"
+        },
+        {
+            "user": "Aladeen",
+            "content": "hallootjes",
+            "postDate": "2017-03-29"
+        },
+        {
+            "user": "Jeff",
+            "content": "Number whannn",
+            "postDate": "2017-03-28"
+        },
+        {
+            "user": "Frankie",
+            "content": "Number whannn",
+            "postDate": "2017-03-28"
+        },
+        {
+            "user": "Bob",
+            "content": "Number whannn",
+            "postDate": "2017-03-28"
+        },
+        {
+            "user": "Goku",
+            "content": "Number whannn",
+            "postDate": "2017-03-28"
+        },
+        {
+            "user": "Aladeen",
+            "content": "Number whannn",
+            "postDate": "2017-03-28"
+        }
+    ]
+}

@@ -107,6 +107,15 @@ public class Kweet implements Serializable {
         return user;
     }
 
+    public void setPostDate(GregorianCalendar postDate) {
+        this.postDate = postDate;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

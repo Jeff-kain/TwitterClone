@@ -36,6 +36,9 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
     @Override
     public User findUser(String userName) {
         List<User> users = em.createNamedQuery("User.finduser").setParameter("userName", userName).getResultList();
+        if(users.size()==0){
+            return null;
+        }
         return users.get(0);
     }
 

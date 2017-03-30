@@ -13,6 +13,8 @@ import Service.KwetterService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.batch.operations.JobOperator;
+import javax.batch.runtime.BatchRuntime;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -29,6 +31,9 @@ public class Initialize {
     @Inject
     private KwetterService service;
 
+    private long execID;
+    private JobOperator jobOperator;
+
     @PostConstruct
     private void initData() {
 
@@ -37,7 +42,8 @@ public class Initialize {
         } catch (KwetterException ex) {
             Logger.getLogger(Initialize.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+//        jobOperator = BatchRuntime.getJobOperator();
+//        execID = jobOperator.start("inputKweetJob", null);
     }
 
     public void createData() throws KwetterException {
@@ -47,7 +53,7 @@ public class Initialize {
         User u3 = new User("Goku", "Goku.nl");
 
         Kweet k1 = new Kweet("Yo @Bob #JEA", u);
-        Kweet k2 = new Kweet("yo2", u);
+        Kweet k2 = new Kweet("yo2 @Goku #DBZ", u);
         Kweet k3 = new Kweet("yo3", u);
         Kweet k4 = new Kweet("yo4", u);
         Kweet k5 = new Kweet("yo5", u);
