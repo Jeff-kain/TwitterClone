@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">   
+    <h:head>
+    </h:head>
+    <h:body>
+        <b:container>
+            <b:row>
+                <b:column col-md="6">
+                    <h2> Recent kweets </h2>
+                    <b:dataTable value="#{LoggedUserBean.getTimelineKweets()}" var="kweet" page-length="10" tooltip="Recent kweets" paginated="false">
+                        <b:dataTableColumn value="#{kweet.id}" />
+                        <b:dataTableColumn value="#{kweet.content}" />
+                    </b:dataTable>
+                </b:column>
+                <b:column col-md="6">
+                    <h2> Following </h2>
+                    <b:dataTable value="#{LoggedUserBean.getFollowing()}" var ="user" tooltip="following" searching ="false" paginated="false" >
+                        <b:dataTableColumn value="#{user.userName}" />
+                    </b:dataTable>
+                </b:column>
+            </b:row>
+        </b:container>
+    </h:body>
+</html>

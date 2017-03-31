@@ -26,9 +26,9 @@ import org.hibernate.annotations.LazyCollectionOption;
     ,
     @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u")
     ,
-    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.username FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)")
+    @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)")
     ,
-    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.username FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)"),})
+    @NamedQuery(name = "User.findFollowing", query = "SELECT u FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)"),})
 @Entity
 public class User implements Serializable {
 

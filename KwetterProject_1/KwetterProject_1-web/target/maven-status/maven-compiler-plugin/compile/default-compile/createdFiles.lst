@@ -1,4 +1,3 @@
-Filter\AuthenticationFilter.class
 Dao\UserDAO.class
 Rest\KwetterRestApplication.class
 Dao\UserDaoCollImpl.class
@@ -15,7 +14,6 @@ Batch\KweetProcessor.class
 Authorization\Secured.class
 Domain\User.class
 Batch\InputKweet.class
-Filter\AuthenticationFilter$1.class
 Dao\KwetterDaoCollImpl$1.class
 Filter\CORSFilter.class
 Exceptions\KwetterException.class
@@ -38,7 +36,6 @@ Domain\Kweet_.class
 Exceptions\UserException.class
 Rest\KwetterRestApi.class
 Utils\Initialize.class
-Filter\AuthenticationFilter$1$1.class
 Dao\KwetterDaoCollImpl$2.class
 Exceptions\KweetException.class
 Utils\PermissionsEnum.class

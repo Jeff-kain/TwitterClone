@@ -72,9 +72,9 @@ public class LoggedUserBean implements Serializable {
 
     public User getUser() {
         if (user == null) {
-            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-            String userName = context.getUserPrincipal().getName();
-
+//            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+//            String userName = context.getUserPrincipal().getName();
+            String userName = "Jeff";
             user = service.findUser(userName);
         }
         return user;
@@ -106,11 +106,18 @@ public class LoggedUserBean implements Serializable {
     }
 
     public List<Kweet> getTimelineKweets() {
+        user = service.findUser("Jeff");
         List<Kweet> kweets = new ArrayList<>();
-        for (User user : getUser().getFollowing()) {
-            kweets.addAll(service.findKweetsByUser(user.getUserName()));
-        }
-        kweets.addAll(service.findKweetsByUser(user.getUserName()));
+//        for (User user : getUser().getFollowing()) {
+//            kweets.addAll(service.findRecentKweets(user.getUserName()));
+//        }
+        kweets.addAll(service.findRecentKweets(user.getUserName()));
         return kweets;
+    }
+    
+    public List<User> getFollowing() {
+        List<User> users = new ArrayList<>();
+        users= service.getFollowing("Jeff");
+        return users;
     }
 }
