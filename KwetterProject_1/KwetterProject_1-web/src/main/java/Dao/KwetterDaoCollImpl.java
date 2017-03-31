@@ -50,7 +50,7 @@ public class KwetterDaoCollImpl implements KwetterDAO {
         Collections.sort(userKweets, new Comparator<Kweet>() {
             @Override
             public int compare(Kweet kweet1, Kweet kweet) {
-                return kweet.getDate().compareTo(kweet1.getDate());
+                return kweet.getPostDate().compareTo(kweet1.getPostDate());
             }
         });
         return userKweets;
@@ -80,7 +80,7 @@ public class KwetterDaoCollImpl implements KwetterDAO {
         Collections.sort(userKweets, new Comparator<Kweet>() {
             @Override
             public int compare(Kweet kweet1, Kweet kweet) {
-                return kweet.getDate().compareTo(kweet1.getDate());
+                return kweet.getPostDate().compareTo(kweet1.getPostDate());
             }
         });
         return userKweets;    }

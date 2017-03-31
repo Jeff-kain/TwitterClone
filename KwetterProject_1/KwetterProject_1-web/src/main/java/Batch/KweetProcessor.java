@@ -39,7 +39,7 @@ public class KweetProcessor implements ItemProcessor {
         kweet.setContent(inputkweet.content);
         User user = service.findUser(inputkweet.user);
         if (user == null) {
-            user = new User(inputkweet.user, "");
+            user = new User(inputkweet.user,"pass","USER", "");
             try {
                 service.registerUser(user);
             } catch (UserException ex) {

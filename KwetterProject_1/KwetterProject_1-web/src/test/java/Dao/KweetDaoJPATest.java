@@ -78,7 +78,7 @@ public class KweetDaoJPATest {
     // public void hello() {}
     @Test
     public void testCreateKweet() throws Exception {
-        user1 = new User("User", "www.user1.org");
+        user1 = new User("User","pass", "USER","www.user1.org");
         tx.begin();
         userDao.create(user1);
         tx.commit();
@@ -92,7 +92,7 @@ public class KweetDaoJPATest {
 
     @Test
     public void testRemoveKweet() throws Exception {
-        user1 = new User("User", "www.user1.org");
+        user1 = new User("User","pass", "USER","www.user1.org");
         tx.begin();
         userDao.create(user1);
         tx.commit();
@@ -111,7 +111,7 @@ public class KweetDaoJPATest {
 
     @Test
     public void testUpdateKweet() throws Exception {
-        user1 = new User("User", "www.user1.org");
+        user1 = new User("User","pass","USER", "www.user1.org");
         tx.begin();
         userDao.create(user1);
         tx.commit();

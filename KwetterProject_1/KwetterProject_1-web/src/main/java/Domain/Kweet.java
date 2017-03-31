@@ -99,7 +99,7 @@ public class Kweet implements Serializable {
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    public GregorianCalendar getDate() {
+    public GregorianCalendar getPostDate() {
         return postDate;
     }
 

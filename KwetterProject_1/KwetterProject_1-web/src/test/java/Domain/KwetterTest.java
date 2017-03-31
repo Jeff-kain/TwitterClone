@@ -63,7 +63,7 @@ public class KwetterTest {
     // public void hello() {}
     @Test
     public void verifyKweetMapping() {
-        User user = new User("Jeff", "www.jeff.nl");
+        User user = new User("Jeff","pass","USER", "www.jeff.nl");
         Kweet kweet = new Kweet ("Hallo from test", user);
         tx.begin();
         em.persist(user);

@@ -59,8 +59,8 @@ public class KwetterServiceTest {
         service.setKwetterDAO(kwetterDAO);
         service.setuserDAO(userDAO);
 
-        user1 = new User("User", "www.user1.org");
-        user2 = new User("User", "www.user2.org");
+        user1 = new User("User","pass", "USER","www.user1.org");
+        user2 = new User("User", "pass","USER","www.user2.org");
 
         kweet1 = new Kweet("test", user1);
         kweet2 = new Kweet("test2", user2);

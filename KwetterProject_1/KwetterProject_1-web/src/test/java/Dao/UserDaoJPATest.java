@@ -73,7 +73,7 @@ public class UserDaoJPATest {
     // public void hello() {}
     @Test
     public void testCreateUser() throws Exception {
-        user1 = new User("User", "www.user1.org");
+        user1 = new User("User", "pass","USER","www.user1.org");
         tx.begin();
         userDao.create(user1);
         tx.commit();
@@ -83,7 +83,7 @@ public class UserDaoJPATest {
 
     @Test
     public void testUpdateUser() throws Exception {
-        user1 = new User("User", "www.user1.org");
+        user1 = new User("User", "pass","USER","www.user1.org");
         tx.begin();
         userDao.create(user1);
         tx.commit();
@@ -95,8 +95,8 @@ public class UserDaoJPATest {
     @Test 
     public void testFollowUser()
     {
-         user1 = new User("User", "www.user1.org");
-         User user2 = new User("User2","www.user2.org");
+         user1 = new User("User","pass", "USER","www.user1.org");
+         User user2 = new User("User2","pass","USER","www.user2.org");
          tx.begin();
          userDao.create(user1);
          userDao.create(user2);
@@ -110,8 +110,8 @@ public class UserDaoJPATest {
       @Test 
     public void testUnFollowUser()
     {
-         user1 = new User("User", "www.user1.org");
-         User user2 = new User("User2","www.user2.org");
+         user1 = new User("User", "pass","USER","www.user1.org");
+         User user2 = new User("User2","pass","USER","www.user2.org");
          tx.begin();
          userDao.create(user1);
          userDao.create(user2);

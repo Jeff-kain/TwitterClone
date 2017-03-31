@@ -22,11 +22,13 @@ import org.hibernate.annotations.LazyCollectionOption;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE userName =:userName"),
-    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.userName FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
-    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.userName FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE userName=:userName)"),
-})
+    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE username =:userName")
+    ,
+    @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u")
+    ,
+    @NamedQuery(name = "User.findFollowers", query = "SELECT u.id,u.username FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)")
+    ,
+    @NamedQuery(name = "User.findFollowing", query = "SELECT u.id,u.username FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)"),})
 @Entity
 public class User implements Serializable {
 
@@ -34,12 +36,14 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "userName", unique = true)
-    private String userName;
+    @Column(name = "username", unique = true)
+    private String username;
     @Column(name = "url")
     private String url;
+    private String role;
+    private String password;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Kweet> kweets;
 
     @JoinTable(name = "follower", joinColumns = {
@@ -59,6 +63,24 @@ public class User implements Serializable {
     private PermissionsEnum permission;
 
     @XmlTransient
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @XmlTransient
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @XmlTransient
     public List<Kweet> getMentions() {
         return mentions;
     }
@@ -76,8 +98,10 @@ public class User implements Serializable {
         this.permission = permission;
     }
 
-    public User(String userName, String url) {
-        this.userName = userName;
+    public User(String userName, String password, String role, String url) {
+        this.username = userName;
+        this.password = password;
+        this.role = role;
         this.url = url;
     }
 
@@ -93,11 +117,11 @@ public class User implements Serializable {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getUrl() {

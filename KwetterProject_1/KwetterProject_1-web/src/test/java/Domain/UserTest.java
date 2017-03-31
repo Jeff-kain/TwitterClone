@@ -63,7 +63,7 @@ public class UserTest {
     // public void hello() {}
     @Test
     public void verifyUserMapping() {
-        User user = new User("Jeff", "www.jeff.nl");
+        User user = new User("Jeff","pass", "USER","www.jeff.nl");
 
         tx.begin();
 
