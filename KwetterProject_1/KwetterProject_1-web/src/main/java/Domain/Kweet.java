@@ -28,6 +28,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -38,12 +40,11 @@ import javax.xml.bind.annotation.XmlTransient;
     ,
     @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT DISTINCT(k) FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName)")
+            + "WHERE userName = :userName) ORDER BY postDate DESC")
     ,
     @NamedQuery(name = "Kweet.findRecentKweets", query = "SELECT DISTINCT(k) FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName) ORDER BY postDate DESC"),
-        })
+            + "WHERE userName = :userName) ORDER BY postDate DESC"),})
 @Entity
 public class Kweet implements Serializable {
 
@@ -60,6 +61,7 @@ public class Kweet implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ElementCollection
     @CollectionTable(name = "TRENDS")
     private List<String> trends;
@@ -115,7 +117,6 @@ public class Kweet implements Serializable {
         this.user = user;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -22,13 +22,13 @@ import org.hibernate.annotations.LazyCollectionOption;
  * @author jeffrey
  */
 @NamedQueries({
-    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE username =:userName")
+    @NamedQuery(name = "User.finduser", query = "SELECT u FROM User u WHERE username =:username")
     ,
     @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM User u")
     ,
-    @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)")
+    @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM User u JOIN u.following f WHERE f.id = (SELECT u.id FROM User u WHERE username=:username)")
     ,
-    @NamedQuery(name = "User.findFollowing", query = "SELECT u FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE username=:userName)"),})
+    @NamedQuery(name = "User.findFollowing", query = "SELECT u FROM User u JOIN u.followers f WHERE f.id = (SELECT u.id FROM User u WHERE username=:username)"),})
 @Entity
 public class User implements Serializable {
 
@@ -36,12 +36,12 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "username", unique = true)
+    @Column(unique = true)
     private String username;
-    @Column(name = "url")
     private String url;
     private String role;
     private String password;
+    private String bio;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Kweet> kweets;
@@ -71,6 +71,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
     @XmlTransient
     public String getRole() {
         return role;
@@ -98,11 +106,19 @@ public class User implements Serializable {
         this.permission = permission;
     }
 
-    public User(String userName, String password, String role, String url) {
-        this.username = userName;
+    public User(String username, String password, String role, String url) {
+        this.username = username;
         this.password = password;
         this.role = role;
         this.url = url;
+    }
+
+    public User(String username, String password, String role, String url, String bio) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.url = url;
+        this.bio = bio;
     }
 
     public User() {

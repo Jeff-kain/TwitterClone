@@ -8,19 +8,40 @@
     <h:head>
     </h:head>
     <h:body>
+        <b:navBar brand="Kwetter" brandHref="#" fixed="top" inverse="true">
+            <b:navbarLinks>
+                <!--                <b:navLink value="Home" href="#"></b:navLink>
+                                <b:navLink value="About" href="#about"></b:navLink>
+                                <b:navLink value="Contact" href="#contact"></b:navLink>-->
+            </b:navbarLinks>
+        </b:navBar>
         <b:container>
+            <b:row>
+                <h2>Details</h2>    
+                <b:panelGrid colSpans="1,11">
+                    <h:outputText value="Name:" />
+                    <h:outputText value="#{LoggedUserBean.user.userName}" />
+                    <h:outputText value="Web:" />
+                    <h:outputText value="#{LoggedUserBean.user.url}"/>
+                    <h:outputText value="Bio:" />
+                    <h:outputText value="#{LoggedUserBean.user.bio}"/>
+                </b:panelGrid>
+            </b:row>
             <b:row>
                 <b:column col-md="6">
                     <h2> Recent kweets </h2>
-                    <b:dataTable value="#{LoggedUserBean.getTimelineKweets()}" var="kweet" page-length="10" tooltip="Recent kweets" paginated="false">
-                        <b:dataTableColumn value="#{kweet.id}" />
+                    <b:dataTable value="#{LoggedUserBean.getRecentKweets()}" var="kweet" page-length="10" tooltip="Recent kweets" paginated="false" searching="false">
                         <b:dataTableColumn value="#{kweet.content}" />
                     </b:dataTable>
                 </b:column>
                 <b:column col-md="6">
+                    <h2>Followers</h2>
+                    <b:dataTable value="#{LoggedUserBean.getFollowers()}" var ="user" tooltip="followers" searching ="false" paginated="false" page-length="5">
+                        <b:dataTableColumn value="#{user.userName}" label="User"/>
+                    </b:dataTable>
                     <h2> Following </h2>
-                    <b:dataTable value="#{LoggedUserBean.getFollowing()}" var ="user" tooltip="following" searching ="false" paginated="false" >
-                        <b:dataTableColumn value="#{user.userName}" />
+                    <b:dataTable value="#{LoggedUserBean.getFollowing()}" var ="user" tooltip="following" searching ="false" paginated="false" page-length="5">
+                        <b:dataTableColumn value="#{user.userName}" label="User"/>
                     </b:dataTable>
                 </b:column>
             </b:row>

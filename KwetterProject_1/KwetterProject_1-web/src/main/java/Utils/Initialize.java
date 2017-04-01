@@ -47,14 +47,14 @@ public class Initialize {
     }
 
     public void createData() throws KwetterException {
-        User u = new User("Jeff", "pass", "ADMIN", "Tilburg.nl");
+        User u = new User("Jeff", "Jeff", "ADMIN", "Tilburg.nl", "Dit is mijn bio");
         User u1 = new User("Frankie", "pass", "USER","Frankie.nl");
         User u2 = new User("Bob","pass","USER", "Bob.nl");
         User u3 = new User("Goku", "pass","USER","Goku.nl");
 
         Kweet k1 = new Kweet("Yo @Bob #JEA", u);
         Kweet k2 = new Kweet("yo2 @Goku #DBZ", u);
-        Kweet k3 = new Kweet("yo3", u);
+        Kweet k3 = new Kweet("yo3 @Jeff", u2);
         Kweet k4 = new Kweet("yo4", u);
         Kweet k5 = new Kweet("yo5", u);
         Kweet k6 = new Kweet("yo6", u);
@@ -92,6 +92,5 @@ public class Initialize {
         service.createKweet(k9);
         service.createKweet(k10);
         service.createKweet(k11);
-
     }
 }

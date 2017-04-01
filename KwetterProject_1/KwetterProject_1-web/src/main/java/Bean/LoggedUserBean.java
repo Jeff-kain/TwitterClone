@@ -11,12 +11,9 @@ import Service.KwetterService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,10 +30,46 @@ public class LoggedUserBean implements Serializable {
 
     private String username;
     private String password;
+    private String url;
+    private String bio;
     private String role;
+    private String message;
     private User user;
 
     private String kweetContent;
+    private List<Kweet> timeline;
+
+    private int followerscount;
+    private int followingcount;
+    private int kweetscount;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getFollowerscount() {
+        List<User> users = new ArrayList<>();
+        users = service.getFollowers("Jeff");
+        followerscount = users.size();
+        return followerscount;
+    }
+
+    public int getFollowingcount() {
+        List<User> users = new ArrayList<>();
+        users = service.getFollowing("Jeff");
+        followingcount = users.size();
+        return followingcount;
+    }
+
+    public int getKweetscount() {
+        List<Kweet> kweetsbyuser = service.findKweetsByUser("Jeff");
+        kweetscount = kweetsbyuser.size();
+        return kweetscount;
+    }
 
     public String getRole() {
         return role;
@@ -52,6 +85,22 @@ public class LoggedUserBean implements Serializable {
 
     public String getUserName() {
         return username;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setUserName(String userName) {
@@ -105,7 +154,11 @@ public class LoggedUserBean implements Serializable {
         return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }
 
-    public List<Kweet> getTimelineKweets() {
+    public void createKweet() {
+        service.createKweet(new Kweet(message, user));
+        message = "";
+    }
+    public List<Kweet> getRecentKweets() {
         user = service.findUser("Jeff");
         List<Kweet> kweets = new ArrayList<>();
 //        for (User user : getUser().getFollowing()) {
@@ -114,10 +167,52 @@ public class LoggedUserBean implements Serializable {
         kweets.addAll(service.findRecentKweets(user.getUserName()));
         return kweets;
     }
-    
+
+    public List<Kweet> getTimeLineKweets() {
+        user = service.findUser("Jeff");
+        timeline = new ArrayList<>();
+        for (User user : service.getFollowing(user.getUserName())) {
+            timeline.addAll(service.findKweetsByUser(user.getUserName()));
+        }
+        List<Kweet> kweetsbyuser = service.findKweetsByUser(user.getUserName());
+        kweetscount = kweetsbyuser.size();
+        timeline.addAll(kweetsbyuser);
+        return timeline;
+    }
+
+    public List<String> getTrends() {
+        List<String> trends = new ArrayList<>();
+        for (Kweet k : timeline) {
+            if (k.getTrends() != null) {
+                for (String s : k.getTrends()) {
+                    trends.add("#" + s);
+                }
+            }
+        }
+        return trends;
+    }
+
+    public void whatsHappening() {
+
+    }
+
+    public List<Kweet> getMentions() {
+        List<Kweet> kweets = new ArrayList<>();
+        kweets.addAll(user.getMentions());
+        return kweets;
+    }
+
     public List<User> getFollowing() {
         List<User> users = new ArrayList<>();
-        users= service.getFollowing("Jeff");
+        users = service.getFollowing("Jeff");
+        followingcount = users.size();
+        return users;
+    }
+
+    public List<User> getFollowers() {
+        List<User> users = new ArrayList<>();
+        users = service.getFollowers("Jeff");
+        followerscount = users.size();
         return users;
     }
 }
