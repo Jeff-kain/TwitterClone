@@ -35,7 +35,7 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
 
     @Override
     public User findUser(String userName) {
-        List<User> users = em.createNamedQuery("User.finduser").setParameter("userName", userName).getResultList();
+        List<User> users = em.createNamedQuery("User.finduser").setParameter("username", userName).getResultList();
         if(users.size()==0){
             return null;
         }
@@ -83,7 +83,7 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
      */
     @Override
     public List getFollowers(String userName) {
-        return em.createNamedQuery("User.findFollowers").setParameter("userName", userName)
+        return em.createNamedQuery("User.findFollowers").setParameter("username", userName)
                 .getResultList();
     }
 
@@ -106,7 +106,7 @@ public class UserDaoJPA extends DaoFacade<User> implements UserDAO {
      */
     @Override
     public List getFollowing(String userName) {
-        return em.createNamedQuery("User.findFollowing").setParameter("userName", userName).getResultList();
+        return em.createNamedQuery("User.findFollowing").setParameter("username", userName).getResultList();
     }
 
     /**

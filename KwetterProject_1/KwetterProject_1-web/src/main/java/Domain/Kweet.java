@@ -40,11 +40,11 @@ import org.hibernate.annotations.LazyCollectionOption;
     ,
     @NamedQuery(name = "Kweet.findKweetsByUser", query = "SELECT DISTINCT(k) FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName) ORDER BY postDate DESC")
+            + "WHERE username = :username) ORDER BY postDate DESC")
     ,
     @NamedQuery(name = "Kweet.findRecentKweets", query = "SELECT DISTINCT(k) FROM Kweet k,"
             + " User u WHERE user_id IN (SELECT id FROM User u "
-            + "WHERE userName = :userName) ORDER BY postDate DESC"),})
+            + "WHERE username = :username) ORDER BY postDate DESC"),})
 @Entity
 public class Kweet implements Serializable {
 
