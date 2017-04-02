@@ -8,14 +8,18 @@ package Bean;
 import Domain.Kweet;
 import Domain.User;
 import Service.KwetterService;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -147,7 +151,12 @@ public class LoggedUserBean implements Serializable {
 
     public String logOut() {
         getRequest().getSession(false).invalidate();
-        return "logout";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/KwetterProject_1-web-1.0-SNAPSHOT/public/start.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(LoggedUserBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "/KwetterProject_1-web-1.0-SNAPSHOT/login.xhtml";
     }
 
     private HttpServletRequest getRequest() {
@@ -189,10 +198,6 @@ public class LoggedUserBean implements Serializable {
             }
         }
         return trends;
-    }
-
-    public void whatsHappening() {
-
     }
 
     public List<Kweet> getMentions() {

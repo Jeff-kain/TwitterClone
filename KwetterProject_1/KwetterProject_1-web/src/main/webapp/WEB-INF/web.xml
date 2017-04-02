@@ -13,13 +13,13 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    <!--    <session-config>
+    <session-config>
         <session-timeout>
-            30
+            15
         </session-timeout>
-    </session-config>-->
+    </session-config>
     <welcome-file-list>
-        <welcome-file>/protected/start.xhtml</welcome-file>
+        <welcome-file>/public/start.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <web-resource-collection>

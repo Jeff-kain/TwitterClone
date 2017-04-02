@@ -8,13 +8,15 @@
     <h:head>
         <b:navBar brand="Kwetter" brandHref="#" fixed="top" inverse="true">
             <b:navbarLinks>
-                <b:navLink value="Home" href="/KwetterProject_1-web-1.0-SNAPSHOT/protected/start.xhtml"></b:navLink>
+                <b:navLink value="Home" href="/KwetterProject_1-web-1.0-SNAPSHOT/public/start.xhtml"></b:navLink>
             </b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:dropMenu value="#{LoggedUserBean.user.userName}">
-                    <b:navLink value="Profiel" href="/KwetterProject_1-web-1.0-SNAPSHOT/protected/profiel.xhtml"/>
-                    <b:navLink action="#{LoggedUserBean.logOut()}" value="Logout" href="/KwetterProject_1-web-1.0-SNAPSHOT/protected/start.xhtml"/>
-                </b:dropMenu>
+                <h:form>
+                    <b:dropMenu value="#{LoggedUserBean.user.userName}">
+                        <b:navLink value="Profiel" href="/KwetterProject_1-web-1.0-SNAPSHOT/public/profiel.xhtml"/>
+                        <b:navCommandLink  action="#{LoggedUserBean.logOut()}" value="Logout"/>
+                    </b:dropMenu>
+                </h:form>
 
                 <!--
             <b:navLink value="About" href="#about"></b:navLink>
@@ -50,6 +52,7 @@
                     <b:tabView activeIndex="0" > 
                         <b:tab title="Timeline">
                             <b:dataTable value="#{LoggedUserBean.getTimeLineKweets()}" var="kweet" page-length="10" paginated="false">
+                                <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
                                 <b:dataTableColumn value="#{kweet.content}" label="Kweet"/>
                             </b:dataTable>
                         </b:tab>

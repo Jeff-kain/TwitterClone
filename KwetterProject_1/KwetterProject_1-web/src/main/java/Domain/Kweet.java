@@ -100,7 +100,7 @@ public class Kweet implements Serializable {
         this.content = content;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     public GregorianCalendar getPostDate() {
         return postDate;
     }

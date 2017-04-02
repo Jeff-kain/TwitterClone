@@ -49,7 +49,7 @@ public class Initialize {
     public void createData() throws KwetterException {
         User u = new User("Jeff", "Jeff", "ADMIN", "Tilburg.nl", "Dit is mijn bio");
         User u1 = new User("Frankie", "pass", "USER","Frankie.nl");
-        User u2 = new User("Bob","pass","USER", "Bob.nl");
+        User u2 = new User("Bob","pass","USER", "Bob.nl","Ik ben bob");
         User u3 = new User("Goku", "pass","USER","Goku.nl");
 
         Kweet k1 = new Kweet("Yo @Bob #JEA", u);
