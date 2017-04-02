@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,20 +54,20 @@ public class LoggedUserBean implements Serializable {
 
     public int getFollowerscount() {
         List<User> users = new ArrayList<>();
-        users = service.getFollowers("Jeff");
+        users = service.getFollowers(user.getUserName());
         followerscount = users.size();
         return followerscount;
     }
 
     public int getFollowingcount() {
         List<User> users = new ArrayList<>();
-        users = service.getFollowing("Jeff");
+        users = service.getFollowing(user.getUserName());
         followingcount = users.size();
         return followingcount;
     }
 
     public int getKweetscount() {
-        List<Kweet> kweetsbyuser = service.findKweetsByUser("Jeff");
+        List<Kweet> kweetsbyuser = service.findKweetsByUser(user.getUserName());
         kweetscount = kweetsbyuser.size();
         return kweetscount;
     }
@@ -121,9 +122,8 @@ public class LoggedUserBean implements Serializable {
 
     public User getUser() {
         if (user == null) {
-//            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-//            String userName = context.getUserPrincipal().getName();
-            String userName = "Jeff";
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            String userName = context.getUserPrincipal().getName();
             user = service.findUser(userName);
         }
         return user;
@@ -146,7 +146,7 @@ public class LoggedUserBean implements Serializable {
     }
 
     public String logOut() {
-        getRequest().getSession().invalidate();
+        getRequest().getSession(false).invalidate();
         return "logout";
     }
 
@@ -159,7 +159,6 @@ public class LoggedUserBean implements Serializable {
         message = "";
     }
     public List<Kweet> getRecentKweets() {
-        user = service.findUser("Jeff");
         List<Kweet> kweets = new ArrayList<>();
 //        for (User user : getUser().getFollowing()) {
 //            kweets.addAll(service.findRecentKweets(user.getUserName()));
@@ -169,7 +168,7 @@ public class LoggedUserBean implements Serializable {
     }
 
     public List<Kweet> getTimeLineKweets() {
-        user = service.findUser("Jeff");
+        user = service.findUser(user.getUserName());
         timeline = new ArrayList<>();
         for (User user : service.getFollowing(user.getUserName())) {
             timeline.addAll(service.findKweetsByUser(user.getUserName()));
@@ -204,14 +203,14 @@ public class LoggedUserBean implements Serializable {
 
     public List<User> getFollowing() {
         List<User> users = new ArrayList<>();
-        users = service.getFollowing("Jeff");
+        users = service.getFollowing(user.getUserName());
         followingcount = users.size();
         return users;
     }
 
     public List<User> getFollowers() {
         List<User> users = new ArrayList<>();
-        users = service.getFollowers("Jeff");
+        users = service.getFollowers(user.getUserName());
         followerscount = users.size();
         return users;
     }

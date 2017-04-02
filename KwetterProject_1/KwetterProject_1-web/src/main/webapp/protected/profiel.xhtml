@@ -6,15 +6,23 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">   
     <h:head>
-    </h:head>
-    <h:body>
         <b:navBar brand="Kwetter" brandHref="#" fixed="top" inverse="true">
             <b:navbarLinks>
-                <!--                <b:navLink value="Home" href="#"></b:navLink>
-                                <b:navLink value="About" href="#about"></b:navLink>
-                                <b:navLink value="Contact" href="#contact"></b:navLink>-->
+                <b:navLink value="Home" href="/KwetterProject_1-web-1.0-SNAPSHOT/protected/start.xhtml"></b:navLink>
+            </b:navbarLinks>
+            <b:navbarLinks pull="right">
+                <b:dropMenu value="#{LoggedUserBean.user.userName}">
+                    <b:navLink value="Profiel" href="/KwetterProject_1-web-1.0-SNAPSHOT/protected/profiel.xhtml"/>
+                    <b:navLink action="#{LoggedUserBean.logOut()}" value="Logout" href="/KwetterProject_1-web-1.0-SNAPSHOT/protected/start.xhtml"/>
+                </b:dropMenu>
+
+                <!--
+            <b:navLink value="About" href="#about"></b:navLink>
+            <b:navLink value="Contact" href="#contact"></b:navLink>-->
             </b:navbarLinks>
         </b:navBar>
+    </h:head>
+    <h:body>
         <b:container>
             <b:row>
                 <h2>Details</h2>    
