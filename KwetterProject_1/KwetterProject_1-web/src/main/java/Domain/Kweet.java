@@ -30,6 +30,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.ocpsoft.prettytime.PrettyTime;
 
 /**
  *
@@ -117,6 +118,12 @@ public class Kweet implements Serializable {
         this.user = user;
     }
 
+    
+    public String posted() {
+        PrettyTime p = new PrettyTime();
+        return p.format(postDate);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

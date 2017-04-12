@@ -40,10 +40,10 @@ public class AuthenticationServiceImpl {
         //if it doesn't create a new token for this user
         User user = userDAO.findUser(username);
 
-        //Check if password is invalid
-//        if (!user.getPassword().equals(password)) {
-//            throw new AuthenticationException("Incorrect Credentials");
-//        }
+       // Check if password is invalid
+        if (!user.getPassword().equals(password)) {
+            throw new AuthenticationException("Incorrect Credentials");
+        }
     }
 
     /**

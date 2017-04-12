@@ -9,3 +9,4 @@ KwetterProject_1/KwetterProject_1-web/target/maven-status/maven-compiler-plugin/
 KwetterProject_1/KwetterProject_1-web/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 KwetterProject_1/KwetterProject_1-web/target/maven-archiver/pom.properties
 *.class
+KwetterProject_1/KwetterProject_1-web/target/surefire-reports/TEST-Service.KwetterServiceTest.xml

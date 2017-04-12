@@ -9,7 +9,14 @@
         <b:navBar brand="Kwetter" brandHref="#" fixed="top" inverse="true">
             <b:navbarLinks>
                 <b:navLink value="Home" href="/KwetterProject_1-web-1.0-SNAPSHOT/public/start.xhtml"></b:navLink>
+
             </b:navbarLinks>
+            <h:form styleClass="navbar-form navbar-left">
+                <div class="form-group">
+                    <b:inputText placeholder="search" fieldSize="sm"/>
+                    <!--input type="text" class="form-control" placeholder="Search"/-->
+                </div>
+            </h:form>
             <b:navbarLinks pull="right">
                 <h:form>
                     <b:dropMenu value="#{LoggedUserBean.user.userName}">
@@ -17,10 +24,6 @@
                         <b:navCommandLink  action="#{LoggedUserBean.logOut()}" value="Logout"/>
                     </b:dropMenu>
                 </h:form>
-
-                <!--
-            <b:navLink value="About" href="#about"></b:navLink>
-            <b:navLink value="Contact" href="#contact"></b:navLink>-->
             </b:navbarLinks>
         </b:navBar>
     </h:head>
@@ -32,45 +35,53 @@
                     <h:form >
                         <b:inputTextarea placeholder="What's happening" value="#{LoggedUserBean.message}">
                         </b:inputTextarea>
-                        <h:commandButton value="Submit" action="#{LoggedUserBean.createKweet()}" type="submit"/>
-                    </h:form>
-                </b:column>
-                <b:column col-md="6">
-                    <b:panelGrid colSpans="3,9">
-                        <h:outputText value="Your kweets:" />
-                        <h:outputText value="#{LoggedUserBean.getKweetscount()}" />
-                        <h:outputText value="following:" />
-                        <h:outputText value="#{LoggedUserBean.getFollowingcount()}"/>
-                        <h:outputText value="followers:" />
-                        <h:outputText value="#{LoggedUserBean.getFollowerscount()}"/>
-                    </b:panelGrid>
-                </b:column>
-            </b:row>
-            <b:row>
-                <b:column col-md="6">
-                    <h2>Kweets</h2>
-                    <b:tabView activeIndex="0" > 
-                        <b:tab title="Timeline">
+                        <h:commandButton value="Submit" action="#{LoggedUserBean.createKweet()}">
+                            <f:ajax execute="@form" render ="timelinekweets" />
+                    </h:commandButton>
+                </h:form>
+            </b:column>
+            <b:column col-md="6">
+                <b:panelGrid colSpans="3,9">
+                    <h:outputText value="Your kweets:" />
+                    <h:outputText value="#{LoggedUserBean.getKweetscount()}" />
+                    <h:outputText value="following:" />
+                    <h:outputText value="#{LoggedUserBean.getFollowingcount()}"/>
+                    <h:outputText value="followers:" />
+                    <h:outputText value="#{LoggedUserBean.getFollowerscount()}"/>
+                </b:panelGrid>
+            </b:column>
+        </b:row>
+        <b:row>
+            <b:column col-md="6">
+                <h2>Kweets</h2>
+                <b:tabView activeIndex="0" > 
+                    <b:tab title="Timeline">
+                        <h:panelGroup id="timelinekweets">
                             <b:dataTable value="#{LoggedUserBean.getTimeLineKweets()}" var="kweet" page-length="10" paginated="false">
                                 <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
-                                <b:dataTableColumn value="#{kweet.content}" label="Kweet"/>
+                                <b:dataTableColumn value="#{kweet.content}" label="Kweet">
+                                    <h:outputText value="   #{kweet.posted()}"/>
+                                </b:dataTableColumn>
                             </b:dataTable>
-                        </b:tab>
-                        <b:tab title="@Mentions">
-                            <b:dataTable value="#{LoggedUserBean.getMentions()}" var="kweet" page-length="10" paginated="false">
-                                <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
-                                <b:dataTableColumn value="#{kweet.content}" label="Kweet"/>                  
-                            </b:dataTable>
-                        </b:tab>
-                    </b:tabView>
-                </b:column>
-                <b:column col-md="6">
-                    <h2>Trends</h2>
-                    <b:dataTable value="#{LoggedUserBean.getTrends()}" var="trend" page-length="10" paginated="false" searching="false">
-                        <b:dataTableColumn value="#{trend}" label="trends" />                  
-                    </b:dataTable>
-                </b:column>
-            </b:row>
-        </b:container>
-    </h:body>
+                        </h:panelGroup>
+                    </b:tab>
+                    <b:tab title="@Mentions">
+                        <b:dataTable value="#{LoggedUserBean.getMentions()}" var="kweet" page-length="10" paginated="false">
+                            <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
+                            <b:dataTableColumn value="#{kweet.content}" label="Kweet">
+                                <h:outputText value="   #{kweet.posted()}"/>
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </b:tab>
+                </b:tabView>
+            </b:column>
+            <b:column col-md="6">
+                <h2>Trends</h2>
+                <b:dataTable value="#{LoggedUserBean.getTrends()}" var="trend" page-length="10" paginated="false" searching="false">            
+                    <b:dataTableColumn value="#{trend}" label="trends"/>                  
+                </b:dataTable>
+            </b:column>
+        </b:row>
+    </b:container>
+</h:body>
 </html>

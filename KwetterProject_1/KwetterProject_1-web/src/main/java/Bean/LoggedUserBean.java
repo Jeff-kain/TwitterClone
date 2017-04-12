@@ -124,6 +124,7 @@ public class LoggedUserBean implements Serializable {
         this.username = username;
     }
 
+    
     public User getUser() {
         if (user == null) {
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
@@ -163,6 +164,9 @@ public class LoggedUserBean implements Serializable {
         return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }
 
+    public void search() {
+        
+    }
     public void createKweet() {
         service.createKweet(new Kweet(message, user));
         message = "";

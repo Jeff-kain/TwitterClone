@@ -5,6 +5,7 @@
  */
 package Rest;
 
+import Domain.Accesstoken;
 import Domain.UserCredentials;
 import Service.AuthenticationServiceImpl;
 import java.math.BigInteger;
@@ -39,8 +40,9 @@ public class AuthenticationController {
             // Issue a token for the user
             String token = issueToken(userCredentials.getUsername());
 
+             Accesstoken aToken = new Accesstoken(token, "bearer", 600);
             // Return the token on the response
-            return Response.ok(token).build();
+            return Response.ok(aToken).build();
 
         } catch (Exception e) {
             return Response.ok(Response.Status.UNAUTHORIZED).build();
