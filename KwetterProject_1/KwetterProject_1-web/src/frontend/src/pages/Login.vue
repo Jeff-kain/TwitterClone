@@ -105,6 +105,8 @@ import auth from '@/auth'
     data() {
       return {
         formdata: {
+          username: '',
+          password: ''
         },
         loginfail: false,
         loading: false,
@@ -121,6 +123,7 @@ import auth from '@/auth'
     },
     methods: {
       login() {
+        auth.login(this.formdata, '/Start')
       }
     }
   }
