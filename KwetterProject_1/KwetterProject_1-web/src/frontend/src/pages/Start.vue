@@ -99,7 +99,17 @@
 .Arrange--equal {
     table-layout: fixed;
 }
+.trend:hover {
+    color: #1DA1F2;
+}
 
+.aap {
+
+}
+.aap:hover {
+    cursor: pointer;
+    color: #1DA1F2;
+}
 .Arrange {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -159,17 +169,17 @@
     <a class="ProfileCardStats-statList Arrange Arrange--bottom Arrange--equal"><li class="ProfileCardStats-stat Arrange-sizeFit">
         <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" title="0 Tweets">
           <span class="ProfileCardStats-statLabel u-block">kweets</span>
-          <span class="ProfileCardStats-statValue" data-count="0">0</span>
+          <span class="ProfileCardStats-statValue" data-count="0">{{kweetcount}}</span>
         </a>
       </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="12 following">
             <span class="ProfileCardStats-statLabel u-block">following</span>
-            <span class="ProfileCardStats-statValue" data-count="12" data-is-compact="false">12</span>
+            <span class="ProfileCardStats-statValue" data-count="12" data-is-compact="false">3</span>
           </a>
         </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="3 followers">
             <span class="ProfileCardStats-statLabel u-block">followers</span>
-            <span class="ProfileCardStats-statValue" data-count="3" data-is-compact="false">3</span>
+            <span class="ProfileCardStats-statValue" data-count="3" data-is-compact="false">2</span>
           </a>
         </li>
     </a>
@@ -179,9 +189,9 @@
 
   <div id="trends" class="trends pv-top-card-section__edit-photo" >
   <h1 class="h1"> Trends </h1>
-  <span class="ProfileCardStats">#Test</span>
-    <p class="ProfileCardStats" >#Test2</p>
-
+  <div v-for="trend in trends">
+  <span class="ProfileCardStats trend">{{trend}}</span>
+    </div>
   </div>
   </div>
   <div class="centerContent">
@@ -197,13 +207,13 @@
     <Tabs type="card" :animated="false">
         <Tab-pane label="Kweets">
         <div class="col-md-12">
-      <div class="tweet timelineMessage" v-for="n in 3">
+      <div class="tweet timelineMessage" v-for="kweet in kweets">
         <div class="col-md-12">
           <div class="col-md-9">
-            <p><strong>Jeff</strong> @Jeff - 4 weeks ago</p>
+            <p><strong>{{kweet.owner.userName}}</strong> <strong class="aap" @click="gotoprofile(kweet.owner.userName)">@{{kweet.owner.userName}}</strong> - a moment ago</p>
           </div>
           <div class="col-md-12">
-            <p>Hallo{{n}}</p>
+            <p>{{kweet.content}}</p>
           </div>
         </div>
       </div>
@@ -211,13 +221,13 @@
     </div>
    </Tab-pane>
     <Tab-pane label="Mentions">
-          <div class="tweet timelineMessage">
+          <div class="tweet timelineMessage" v-for="mention in mentions">
         <div class="col-md-12">
           <div class="col-md-9">
-            <p><strong>Jeff</strong> @Jeff - 4 weeks ago</p>
+            <p><strong>{{mention.owner.userName}}</strong> @{{mention.owner.userName}} - a moment ago</p>
           </div>
           <div class="col-md-12">
-            <p>Hallo @Jeff</p>
+            <p>{{mention.content}}</p>
           </div>
         </div>
         </div>
@@ -233,22 +243,70 @@ import request from '@/utils/request'
         data () {
             return {
                   formdata: {
-                         content: ''
-        }
+                         content: '',   
+        },
+        kweets: [],
+        mentions: [],
+        trends: [],
+        kweetcount: 3
             }
         }, 
           methods: {
+                   gotoprofile(val) {
+                    this.$router.push('/profile/' + val)
+              },
             addkweet() {
                     request
-                    .post("kwetter-api/kweets", this.formdata.content)
+                    .post("kwetter-api/kweets", "{\"content\":\""+this.formdata.content+"\"}")
                     .then((response) => {
-                       
+                       this.getKweets();
+                       this.getTrends();
+                       this.getmentions();
                     })
                     .catch((error) => {
                         console.log(error);
-                    });
-                
-            }
-    },      
+                    });               
+            },
+            sortTrends() {
+                this.kweets = []
+            },
+            getmentions () {
+                        request
+          .get('kwetter-api/mentions')
+          .then((response) => {
+            this.mentions = response
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+            getTrends() {
+                                    request
+          .get('kwetter-api/trends')
+          .then((response) => {
+            this.trends = response
+            
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+                 getKweets() {
+        request
+          .get('kwetter-api/kweets/timeline')
+          .then((response) => {
+            this.kweets = response;
+           // this.kweetcount = kweets.Length;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+    },  
+        mounted() {
+      this.getKweets();
+      this.getmentions();
+      this.getTrends();
+    }    
     }
 </script>

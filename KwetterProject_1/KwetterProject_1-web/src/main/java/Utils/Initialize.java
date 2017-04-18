@@ -76,6 +76,8 @@ public class Initialize {
             // service.followUser(u, u2);
             service.followUser(u3, u);
             service.followUser(u, u2);
+            service.followUser(u, u1);
+            service.followUser(u, u3);
             service.followUser(u3, u2);
         } catch (UserException e) {
             e.printStackTrace();
@@ -84,13 +86,13 @@ public class Initialize {
         service.createKweet(k1);
         service.createKweet(k2);
         service.createKweet(k3);
-        service.createKweet(k4);
-        service.createKweet(k5);
-        service.createKweet(k6);
-        service.createKweet(k7);
-        service.createKweet(k8);
-        service.createKweet(k9);
-        service.createKweet(k10);
-        service.createKweet(k11);
+//        service.createKweet(k4);
+//        service.createKweet(k5);
+//        service.createKweet(k6);
+//        service.createKweet(k7);
+//        service.createKweet(k8);
+//        service.createKweet(k9);
+//        service.createKweet(k10);
+//        service.createKweet(k11);
     }
 }

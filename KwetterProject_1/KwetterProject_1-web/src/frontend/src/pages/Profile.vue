@@ -144,6 +144,13 @@
         color: blue;
         margin-left:25%;
     }
+    .aap {
+
+}
+.aap:hover {
+    cursor: pointer;
+    color: #1DA1F2;
+}
     .primaryContent {
     background-color: rgb(254, 254, 254);
     padding: 10px;
@@ -164,17 +171,17 @@
     <a class="ProfileCardStats-statList Arrange Arrange--bottom Arrange--equal"><li class="ProfileCardStats-stat Arrange-sizeFit">
         <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" title="0 Tweets">
           <span class="ProfileCardStats-statLabel u-block">kweets</span>
-          <span class="ProfileCardStats-statValue" data-count="0">0</span>
+          <span class="ProfileCardStats-statValue" data-count="0">3</span>
         </a>
       </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="12 following">
             <span class="ProfileCardStats-statLabel u-block">following</span>
-            <span class="ProfileCardStats-statValue" data-count="12" data-is-compact="false">12</span>
+            <span class="ProfileCardStats-statValue" data-count="12" data-is-compact="false">3</span>
           </a>
         </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="3 followers">
             <span class="ProfileCardStats-statLabel u-block">followers</span>
-            <span class="ProfileCardStats-statValue" data-count="3" data-is-compact="false">3</span>
+            <span class="ProfileCardStats-statValue" data-count="3" data-is-compact="false">2</span>
           </a>
         </li>
     </a>
@@ -184,17 +191,18 @@
 
   <div id="trends" class="trends pv-top-card-section__edit-photo" >
   <h1 class="h1"> Following </h1>
-    <span class="ProfileCardStats">@Bob</span>
-    <p class="ProfileCardStats" >@Goku</p>
+  <div v-for="follow in following">
+    <span class="ProfileCardStats">@{{follow.userName}}.</span>
+    </div>
   </div>
   </div>
   <div class="centerContent">
     <div id="kweets" class="kweets" >
 <div class="primaryContent">				
 									<div class="pairsColumns aboutPairs">
-											<dt>Name:     Jeff</dt>
-											<dt>Bio:      dit is mijn bio</dt>
-                      <dt>Web:      www.jeff.nl</dt>										
+											<dt>Name:     {{user.userName}}</dt>
+											<dt>Bio:      {{user.bio}}</dt>
+                      <dt>Web:      {{user.url}}</dt>										
 										
 									</div>			
 						</div>
@@ -202,13 +210,13 @@
     <div id="timeline" class="timeline">
     </div>
         <div class="col-md-12">
-      <div class="tweet timelineMessage" v-for="n in 3">
+      <div class="tweet timelineMessage" v-for="kweet in kweets">
         <div class="col-md-12">
           <div class="col-md-9">
-            <p><strong>Jeff</strong> @Jeff - 4 weeks ago</p>
+            <p><strong>{{kweet.owner.userName}}</strong> <strong class="aap" @click="gotoprofile(kweet.owner.userName)">@{{kweet.owner.userName}}</strong> - a moment ago</p>
           </div>
           <div class="col-md-12">
-            <p>Hallo{{n}}</p>
+            <p>{{kweet.content}}</p>
           </div>
         </div>
       </div>
@@ -224,10 +232,20 @@ import request from '@/utils/request'
             return {
                   formdata: {
                          content: ''
-        }
+        },
+              kweets: [],
+              following: [],
+              user: {
+                bio:'',
+                url:'',
+                userName:''
+              }
             }
         }, 
           methods: {
+              gotoprofile(val) {
+                    this.$router.push('/profile')
+              },
             addkweet() {
                     request
                     .post("kwetter-api/kweets", this.formdata.content)
@@ -238,7 +256,71 @@ import request from '@/utils/request'
                         console.log(error);
                     });
                 
+            },
+            getKweets() {
+                      request
+          .get('kwetter-api/kweets/recent')
+          .then((response) => {
+            this.kweets = response;
+           // this.kweetcount = kweets.Length;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+                getvisitKweets() {
+                      request
+          .get('kwetter-api/kweets/recent/'+this.$route.params.username)
+          .then((response) => {
+            this.kweets = response;
+           // this.kweetcount = kweets.Length;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+            getUserInfo() {
+                    request
+          .get('kwetter-api/currentuser')
+          .then((response) => {
+            this.user = response;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+
+                    getVisitInfo() {
+                    request
+          .get('kwetter-api/visit/'+this.$route.params.username)
+          .then((response) => {
+            this.user = response;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+            getFollowing() {
+                                request
+          .get('kwetter-api/following')
+          .then((response) => {
+            this.following = response;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
             }
-    },      
+    },   
+           mounted() {
+
+               if(this.$route.params.username) {
+                   console.log(this.$route.params.username)
+               } else {
+
+      this.getKweets();
+      this.getUserInfo();
+      this.getFollowing();
+               }
+    }    
     }
 </script>

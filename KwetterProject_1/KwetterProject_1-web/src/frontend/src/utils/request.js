@@ -45,9 +45,6 @@ export default {
         }
     },
     get(url, params) {
-        console.log(baseURL)
-        console.log(url)
-        console.log(this.getHeaders())
         return axios({
             method: 'get',
             url: baseURL + url,

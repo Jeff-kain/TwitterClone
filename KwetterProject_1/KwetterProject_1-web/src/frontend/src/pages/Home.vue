@@ -136,8 +136,8 @@
                             <Icon type="arrow-down-b"></Icon>
                         </a>
                         <Dropdown-menu slot="list">
-                            <router-link to="/Profile"><Dropdown-item>Profiel</Dropdown-item></router-link>
-                            <Dropdown-item>Sign out</Dropdown-item>
+                            <router-link to="/profile"><Dropdown-item>Profiel</Dropdown-item></router-link>
+                            <router-link to="/login"><Dropdown-item @click="logout()">Sign out</Dropdown-item></router-link>
                         </Dropdown-menu>
                     </Dropdown>
                 </div>
@@ -157,6 +157,7 @@
 </template>
 <script>
 import store from '@/store'
+import auth from '@/auth'
 export default {
   name: 'test',
   components: {
@@ -178,6 +179,9 @@ export default {
         console.log(error);
       });
     }
+  },
+  logout() {
+      auth.logout();
   },
   computed: {
     fullname: function () {

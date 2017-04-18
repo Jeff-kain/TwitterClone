@@ -6,7 +6,6 @@ export default {
     user: {
         authenticated: false
     },
-
     login(creds, redirect) {
         request.post('authentication', creds)
             .then((response) => {

@@ -40,7 +40,9 @@ public class KwetterRestApi {
     @Inject
     private KwetterService kwetterService;
     private User user;
-
+    private User visit;
+    
+    List<Kweet> timeline;
     @Context
     SecurityContext securityContext;
 
@@ -68,17 +70,44 @@ public class KwetterRestApi {
         final List<Kweet> Kweets = kwetterService.findAllKweets();
         return Response.ok(Kweets).build();
     }
+        @GET
+        @Path("/kweets/timeline")
+        public List<Kweet> getTimeLineKweets() {
+        timeline = new ArrayList<>();
+        for (User user : kwetterService.getFollowing(user.getUserName())) {
+            timeline.addAll(kwetterService.findKweetsByUser(user.getUserName()));
+        }
+        List<Kweet> kweetsbyuser = kwetterService.findKweetsByUser(user.getUserName());
+        timeline.addAll(kweetsbyuser);
+        return timeline;
+    }
 
     @GET
     @Path("/trends")
     public Response getTrends() {
-        return Response.ok().build();
+        List<String> trends = new ArrayList<>();
+        timeline=getTimeLineKweets();
+        for (Kweet k : timeline) {
+            if (k.getTrends() != null) {
+                for (String s : k.getTrends()) {
+                    trends.add("#" + s);
+                }
+            }
+        }
+        return Response.ok(trends).build();
     }
 
     @GET
     @Path("/kweets/recent")
     public Response getRecentKweets() {
         final List<Kweet> Kweets = kwetterService.findRecentKweets(user.getUserName());
+        return Response.ok(Kweets).build();
+    }
+    
+    @GET
+    @Path("/kweets/recent/{username}")
+    public Response getRecentKweetsByUser(@PathParam("userName") String userName) {
+        final List<Kweet> Kweets = kwetterService.findRecentKweets(visit.getUserName());
         return Response.ok(Kweets).build();
     }
 
@@ -93,6 +122,13 @@ public class KwetterRestApi {
     @Path("/following")
     public Response getFollowing() {
         final List<User> followers = kwetterService.getFollowing(user.getUserName());
+        return Response.ok(followers).build();
+    }
+    
+    @GET
+    @Path("/following/{username}")
+    public Response getFollowingvisit(@PathParam("username") String userName) {
+        final List<User> followers = kwetterService.getFollowing(visit.getUserName());
         return Response.ok(followers).build();
     }
 
@@ -153,5 +189,12 @@ public class KwetterRestApi {
     @Path("currentuser")
     public User getCurrentUser() {
         return user;
+    }
+    
+     @GET
+    @Path("visit/{username}")
+    public User getVisitUser(@PathParam("username") String userName) {
+        visit = kwetterService.findUser(userName);
+        return visit;
     }
 }

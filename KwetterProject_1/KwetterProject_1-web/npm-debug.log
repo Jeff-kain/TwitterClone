@@ -2,13 +2,13 @@
 1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'run',
-1 verbose cli   'dev\u0003\u0003' ]
+1 verbose cli   'dev' ]
 2 info using npm@4.1.2
 3 info using node@v7.7.4
 4 verbose stack Error: ENOENT: no such file or directory, open 'C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\package.json'
 5 verbose cwd C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web
 6 error Windows_NT 10.0.14393
-7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev\u0003\u0003"
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev"
 8 error node v7.7.4
 9 error npm  v4.1.2
 10 error path C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\package.json

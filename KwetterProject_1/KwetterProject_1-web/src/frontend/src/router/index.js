@@ -33,6 +33,15 @@ export default new Router({
                         parent: ['/'],
                         breadcrumb: 'profile'
                     },
+        },
+     {                
+          path: '/profile/:username',
+          name: 'Profilet',
+          component: require('../pages/Profile.vue'),
+              meta: {
+                        parent: ['/'],
+                        breadcrumb: 'profile'
+                    },
         }
             ]
           },
