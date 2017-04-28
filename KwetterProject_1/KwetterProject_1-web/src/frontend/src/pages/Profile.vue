@@ -192,7 +192,7 @@
   <div id="trends" class="trends pv-top-card-section__edit-photo" >
   <h1 class="h1"> Following </h1>
   <div v-for="follow in following">
-    <span class="ProfileCardStats">@{{follow.userName}}.</span>
+    <p class="ProfileCardStats aap" @click="gotoprofile(follow.userName)">@{{follow.userName}}.</p>
     </div>
   </div>
   </div>
@@ -240,11 +240,12 @@ import request from '@/utils/request'
                 url:'',
                 userName:''
               }
+              
             }
         }, 
           methods: {
               gotoprofile(val) {
-                    this.$router.push('/profile')
+                    this.$router.push('/profile');
               },
             addkweet() {
                     request
@@ -268,11 +269,22 @@ import request from '@/utils/request'
             console.log(error);
           });
             },
-                getvisitKweets() {
+                getvisitKweets(val) {
                       request
-          .get('kwetter-api/kweets/recent/'+this.$route.params.username)
+          .get('kwetter-api/kweets/recent/'+val)
           .then((response) => {
             this.kweets = response;
+           // this.kweetcount = kweets.Length;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+            },
+            getvisitFollowing(val) {
+                request
+          .get('kwetter-api/following/'+val)
+          .then((response) => {
+            this.following = response;
            // this.kweetcount = kweets.Length;
           })
           .catch((error) => {
@@ -289,10 +301,9 @@ import request from '@/utils/request'
             console.log(error);
           });
             },
-
-                    getVisitInfo() {
+                    getVisitInfo(val) {
                     request
-          .get('kwetter-api/visit/'+this.$route.params.username)
+          .get('kwetter-api/visit/'+val)
           .then((response) => {
             this.user = response;
           })
@@ -314,7 +325,10 @@ import request from '@/utils/request'
            mounted() {
 
                if(this.$route.params.username) {
-                   console.log(this.$route.params.username)
+                   this.getvisitKweets(this.$route.params.username);
+                   this.getVisitInfo(this.$route.params.username);
+                   this.getvisitFollowing(this.$route.params.username);
+                   
                } else {
 
       this.getKweets();
