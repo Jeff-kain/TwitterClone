@@ -224,7 +224,7 @@
           <div class="tweet timelineMessage" v-for="mention in mentions">
         <div class="col-md-12">
           <div class="col-md-9">
-            <p><strong>{{mention.owner.userName}}</strong> @{{mention.owner.userName}} - a moment ago</p>
+            <p><strong>{{mention.owner.userName}}</strong> <strong class="aap" @click="gotoprofile(mention.owner.userName)">@{{mention.owner.userName}}</strong> - a moment ago</p>
           </div>
           <div class="col-md-12">
             <p>{{mention.content}}</p>

@@ -106,8 +106,8 @@ public class KwetterRestApi {
     
     @GET
     @Path("/kweets/recent/{username}")
-    public Response getRecentKweetsByUser(@PathParam("userName") String userName) {
-        final List<Kweet> Kweets = kwetterService.findRecentKweets(visit.getUserName());
+    public Response getRecentKweetsByUser(@PathParam("username") String userName) {
+        final List<Kweet> Kweets = kwetterService.findRecentKweets(userName);
         return Response.ok(Kweets).build();
     }
 
@@ -128,7 +128,7 @@ public class KwetterRestApi {
     @GET
     @Path("/following/{username}")
     public Response getFollowingvisit(@PathParam("username") String userName) {
-        final List<User> followers = kwetterService.getFollowing(visit.getUserName());
+        final List<User> followers = kwetterService.getFollowing(userName);
         return Response.ok(followers).build();
     }
 
