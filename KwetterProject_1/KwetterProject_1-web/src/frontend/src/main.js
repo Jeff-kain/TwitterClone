@@ -6,10 +6,11 @@ import router from './router'
 import store from './store/'
 import request from './utils/request'
 import iView from 'iview'
-
 import 'iview/dist/styles/iview.css';
 
 Vue.use(iView);
+var lang = require('./lang');
+Vue.use(lang);
 
 Vue.prototype.$http = request
 Vue.config.productionTip = false

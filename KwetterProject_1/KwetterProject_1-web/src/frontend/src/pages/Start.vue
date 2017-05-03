@@ -168,17 +168,17 @@
        <div class="ProfileCardStats">
     <a class="ProfileCardStats-statList Arrange Arrange--bottom Arrange--equal"><li class="ProfileCardStats-stat Arrange-sizeFit">
         <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" title="0 Tweets">
-          <span class="ProfileCardStats-statLabel u-block">kweets</span>
+          <span class="ProfileCardStats-statLabel u-block">Kweets</span>
           <span class="ProfileCardStats-statValue" data-count="0">{{kweetcount}}</span>
         </a>
       </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="12 following">
-            <span class="ProfileCardStats-statLabel u-block">following</span>
+            <span class="ProfileCardStats-statLabel u-block">{{$lang.following}}</span>
             <span class="ProfileCardStats-statValue" data-count="12" data-is-compact="false">3</span>
           </a>
         </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="3 followers">
-            <span class="ProfileCardStats-statLabel u-block">followers</span>
+            <span class="ProfileCardStats-statLabel u-block">{{$lang.followers}}</span>
             <span class="ProfileCardStats-statValue" data-count="3" data-is-compact="false">2</span>
           </a>
         </li>
@@ -199,7 +199,7 @@
   <Input type="textarea" class="kweets" rows="4" cols="55" v-model="formdata.content">
 </Input>
  <button class="btn-primary" type="primary" @click="addkweet()" long>
-            <span>Add Kweet</span>
+            <span>{{$lang.addkweet}}</span>
         </button>
      </div>
     <div id="timeline" class="timeline">

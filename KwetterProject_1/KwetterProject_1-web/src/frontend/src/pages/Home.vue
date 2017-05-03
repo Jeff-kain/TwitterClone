@@ -136,8 +136,10 @@
                             <Icon type="arrow-down-b"></Icon>
                         </a>
                         <Dropdown-menu slot="list">
-                            <router-link to="/profile"><Dropdown-item>Profiel</Dropdown-item></router-link>
-                            <router-link to="/login"><Dropdown-item @click="logout()">Sign out</Dropdown-item></router-link>
+                            <router-link to="/profile"><Dropdown-item>{{$lang.profile}}</Dropdown-item></router-link>
+                            <router-link to="/login"><Dropdown-item @click="logout()">{{$lang.signout}}</Dropdown-item></router-link>
+                             <Dropdown-item><div @click="$setLang('en')">EN</div></Dropdown-item>
+                            <Dropdown-item><div @click="$setLang('nl')">NL</div></Dropdown-item>
                         </Dropdown-menu>
                     </Dropdown>
                 </div>

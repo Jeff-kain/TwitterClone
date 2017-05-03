@@ -170,17 +170,17 @@
       <div class="ProfileCardStats">
     <a class="ProfileCardStats-statList Arrange Arrange--bottom Arrange--equal"><li class="ProfileCardStats-stat Arrange-sizeFit">
         <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" title="0 Tweets">
-          <span class="ProfileCardStats-statLabel u-block">kweets</span>
+          <span class="ProfileCardStats-statLabel u-block">Kweets</span>
           <span class="ProfileCardStats-statValue" data-count="0">3</span>
         </a>
       </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="12 following">
-            <span class="ProfileCardStats-statLabel u-block">following</span>
+            <span class="ProfileCardStats-statLabel u-block">{{$lang.following}}</span>
             <span class="ProfileCardStats-statValue" data-count="12" data-is-compact="false">3</span>
           </a>
         </li><li class="ProfileCardStats-stat Arrange-sizeFit">
           <a class="ProfileCardStats-statLink u-textUserColor u-linkClean" data-original-title="3 followers">
-            <span class="ProfileCardStats-statLabel u-block">followers</span>
+            <span class="ProfileCardStats-statLabel u-block">{{$lang.followers}}</span>
             <span class="ProfileCardStats-statValue" data-count="3" data-is-compact="false">2</span>
           </a>
         </li>
@@ -190,7 +190,7 @@
   <strong>{{this.formdata.username}}</strong> 
 
   <div id="trends" class="trends pv-top-card-section__edit-photo" >
-  <h1 class="h1"> Following </h1>
+  <h1 class="h1"> {{$lang.following}} </h1>
   <div v-for="follow in following">
     <p class="ProfileCardStats aap" @click="gotoprofile(follow.userName)">@{{follow.userName}}.</p>
     </div>
@@ -200,7 +200,7 @@
     <div id="kweets" class="kweets" >
 <div class="primaryContent">				
 									<div class="pairsColumns aboutPairs">
-											<dt>Name:     {{user.userName}}</dt>
+											<dt>{{$lang.name}}:     {{user.userName}}</dt>
 											<dt>Bio:      {{user.bio}}</dt>
                       <dt>Web:      {{user.url}}</dt>										
 										
