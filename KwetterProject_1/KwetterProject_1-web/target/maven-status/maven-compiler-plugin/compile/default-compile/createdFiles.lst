@@ -11,15 +11,19 @@ Domain\User.class
 Domain\Accesstoken.class
 Filter\AuthenticationFilter$1.class
 Dao\KwetterDaoCollImpl$1.class
+Websocket\EndPoint.class
+Websocket\EchoBean.class
 Bean\UserBean.class
 Service\AuthorizationServiceImpl.class
 Batch\KweetReader$1.class
+Websocket\MessageDecoder.class
 Dao\KwetterDaoCollImpl.class
 Exceptions\PermissionException.class
 Domain\Kweet_.class
 Exceptions\UserException.class
 Rest\KwetterRestApi.class
 Utils\Initialize.class
+Bean\MessageBean.class
 Batch\KweetWriter.class
 Rest\KwetterRestApplication.class
 Dao\UserDaoJPA.class
@@ -29,7 +33,9 @@ Batch\KweetProcessor.class
 Authorization\Secured.class
 Batch\InputKweet.class
 Filter\CORSFilter.class
+Domain\Message.class
 Exceptions\KwetterException.class
+Websocket\MessageEncoder.class
 Bean\BatchBean.class
 Service\AuthenticationServiceImpl.class
 Domain\Kweetcontent.class
@@ -41,6 +47,7 @@ Bean\LoggedUserBean.class
 Dao\DaoFacade.class
 Dao\JPA.class
 Domain\UserCredentials.class
+Websocket\HttpSessionProvider.class
 Filter\AuthenticationFilter$1$1.class
 Dao\KwetterDaoCollImpl$2.class
 Exceptions\KweetException.class

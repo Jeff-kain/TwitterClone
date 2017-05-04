@@ -4,7 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">   
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">  
+      <script src="echo.js"></script>    
+
     <h:head>
         <b:navBar brand="Kwetter" brandHref="#" fixed="top" inverse="true">
             <b:navbarLinks>
@@ -36,6 +38,8 @@
                         <b:inputTextarea placeholder="What's happening" value="#{LoggedUserBean.message}">
                         </b:inputTextarea>
                         <h:commandButton value="Submit" action="#{LoggedUserBean.createKweet()}">
+                            <h:commandButton value="Send" action="doSend(#{LoggedUserBean.createdKweet});"/>
+
                             <f:ajax execute="@form" render ="timelinekweets" />
                     </h:commandButton>
                 </h:form>
@@ -84,4 +88,5 @@
         </b:row>
     </b:container>
 </h:body>
+<div id="output" class="console"></div>
 </html>

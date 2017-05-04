@@ -197,4 +197,19 @@ public class KwetterRestApi {
         visit = kwetterService.findUser(userName);
         return visit;
     }
+    
+//       @Inject
+//    private JMSContext context;
+// 
+//    @Resource(lookup = "java:jboss/exported/jms/queue/kwettergo")
+//    Queue queue;
+// 
+// 
+////Code:
+// 
+//            TextMessage message = context.createTextMessage();
+//            message.setText("KWETTER_API");
+//            message.setIntProperty("id", id);
+//            message.setStringProperty("text", text);
+//            context.createProducer().send(queue, message);
 }

@@ -40,6 +40,7 @@ public class LoggedUserBean implements Serializable {
     private String role;
     private String message;
     private User user;
+    private Kweet createdKweet;
 
     private String kweetContent;
     private List<Kweet> timeline;
@@ -54,6 +55,14 @@ public class LoggedUserBean implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Kweet getCreatedKweet() {
+        return createdKweet;
+    }
+
+    public void setCreatedKweet(Kweet createdKweet) {
+        this.createdKweet = createdKweet;
     }
 
     public int getFollowerscount() {
@@ -168,7 +177,8 @@ public class LoggedUserBean implements Serializable {
         
     }
     public void createKweet() {
-        service.createKweet(new Kweet(message, user));
+        createdKweet = new Kweet(message, user);
+        service.createKweet(createdKweet);
         message = "";
     }
     public List<Kweet> getRecentKweets() {

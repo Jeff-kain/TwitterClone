@@ -3,9 +3,13 @@ C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterPro
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Accesstoken.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\AuthenticationException.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Batch\Checkpoint.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Bean\MessageBean.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\AuthenticationController.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Utils\KwetterTag.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Websocket\EchoBean.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Websocket\HttpSessionProvider.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\UserCredentials.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Websocket\EndPoint.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Kweetcontent.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\AuthenticationFilter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Rest\KwetterRestApi.java
@@ -19,10 +23,12 @@ C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterPro
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\KweetException.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\KwetterDaoJPA.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Batch\KweetProcessor.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Websocket\MessageEncoder.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\UserDaoCollImpl.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\User.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Service\KwetterService.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\PermissionException.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Message.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Dao\JPA.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\AuthorizationFilter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Filter\CORSFilter.java
@@ -34,6 +40,7 @@ C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterPro
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Batch\KweetWriter.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Exceptions\KwetterException.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Authorization\Secured.java
+C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Websocket\MessageDecoder.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Bean\BatchBean.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Batch\KweetReader.java
 C:\Users\jeffrey\Documents\FHICT\S6\JEA\TwitterClone\KwetterProject_1\KwetterProject_1-web\src\main\java\Domain\Token.java
