@@ -127,8 +127,8 @@
                  <configuration>
                      <hostname>127.0.0.1</hostname>
                      <port>9990</port>
-                     <username>wildfly</username>
-                     <password>wildfly</password>
+                     <username>Jeff</username>
+                     <password>Heartless275</password>
                  </configuration>
              </plugin>
             <plugin>
