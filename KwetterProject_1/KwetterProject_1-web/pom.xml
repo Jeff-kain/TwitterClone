@@ -120,10 +120,10 @@
                  <artifactId>wildfly-maven-plugin</artifactId>
                  <version>1.0.2.Final</version>
                  <configuration>
-                     <hostname>127.0.0.1</hostname>
+                     <hostname>192.168.25.13</hostname>
                      <port>9990</port>
-                     <username>Jeff</username>
-                     <password>Heartless275</password>
+                     <username>admin</username>
+                     <password>admin</password>
                  </configuration>
              </plugin>
             <plugin>
