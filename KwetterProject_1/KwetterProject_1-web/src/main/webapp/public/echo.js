@@ -18,7 +18,7 @@ function connect() {
     //atach event listeneres
     websocket.onopen = function() {
         log('blue','CONNECTED');
-        doSend("WebSockets rock");
+        // doSend("WebSockets rock");
     };
     websocket.onclose = function() {
         log('blue','DISCONNECTED');
@@ -28,6 +28,7 @@ function connect() {
         var message = JSON.parse(evt.data);
         //write message.text to screen
         log('green', 'I: ' + message.text);
+        //refresh();
     };
     websocket.onerror = function(event) {
         log('red','ERROR: ' + event.data);
@@ -39,9 +40,9 @@ function onLoad() {
     connect();
 }
 
-function doSend(text) {
-    log('black', 'O: ' + text);
-    var message = JSON.stringify({'text': text});
+function doSend(string) {
+    var message = JSON.stringify({'text': string});
+    log('black', 'O: ' + string);
     websocket.send(message);
 }
 
@@ -63,6 +64,10 @@ function keyPressed(event) {
         document.getElementById("sendButton").click();
         document.getElementById("textforws").value = "";
     }
+}
+
+function refresh() {
+    $("#mentions").load(location.href + "#mentions");
 }
 
 

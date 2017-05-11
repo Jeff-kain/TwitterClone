@@ -26,6 +26,5 @@ public class HttpSessionProvider extends ServerEndpointConfig.Configurator{
     @Override
     public void modifyHandshake(ServerEndpointConfig config, HandshakeRequest request, HandshakeResponse response) {
         config.getUserProperties().put(HttpSession.class.getName(), request.getHttpSession());
-    }
-    
+    }  
 }

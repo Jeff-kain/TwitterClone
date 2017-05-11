@@ -19,7 +19,7 @@ import javax.websocket.EndpointConfig;
  * Encodes {@link Message}s to json
  * @author jgeenen
  */
-public class MessageEncoder implements Encoder.Text<Kweet>{
+public class MessageEncoder implements Encoder.Text<Message>{
 
     private static final Logger LOG = Logger.getLogger(MessageEncoder.class.getName());
     static {
@@ -29,7 +29,7 @@ public class MessageEncoder implements Encoder.Text<Kweet>{
     private final Gson gson = new Gson();
     
     @Override
-    public String encode(Kweet m) throws EncodeException {
+    public String encode(Message m) throws EncodeException {
         try{
             return gson.toJson(m);
         } catch (Throwable t){

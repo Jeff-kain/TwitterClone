@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Websocket;
 
+import Bean.LoggedUserBean;
 import Domain.Kweet;
 import java.io.IOException;
 import javax.ejb.Asynchronous;
@@ -17,7 +17,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.websocket.EncodeException;
 import javax.websocket.Session;
-
+import javax.inject.Inject;
 
 @Singleton
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
@@ -28,22 +28,22 @@ public class EchoBean {
     private EchoBean delegate;
 
     @Asynchronous
-    public void send(Session session, Kweet message, int repeats, long delay, double delayMultiplier ){
+    public void send(Session session, String message, int repeats, long delay, double delayMultiplier) {
         try {
-            synchronized(session){
+            synchronized (session) {
                 session.getBasicRemote().sendObject(message);
             }
             Thread.sleep(delay);
         } catch (InterruptedException | IOException | EncodeException ex) {
             throw new IllegalStateException(ex);
         }
-        if(1<repeats){
+        if (1 < repeats) {
             delegate.send(
-                session, 
-                new Kweet(message.getContent(),message.getOwner()), 
-                repeats-1, 
-                Math.round(delay*delayMultiplier), 
-                delayMultiplier
+                    session,
+                    message,
+                    repeats - 1,
+                    Math.round(delay * delayMultiplier),
+                    delayMultiplier
             );
         }
 

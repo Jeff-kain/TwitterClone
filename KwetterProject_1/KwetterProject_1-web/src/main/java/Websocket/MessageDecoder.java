@@ -19,7 +19,7 @@ import javax.websocket.EndpointConfig;
  * Decodes {@link Message}s from json
  * @author jgeenen
  */
-public class MessageDecoder implements Decoder.Text<Kweet>{
+public class MessageDecoder implements Decoder.Text<Message>{
     
     private final Gson gson = new Gson();
     
@@ -30,9 +30,9 @@ public class MessageDecoder implements Decoder.Text<Kweet>{
     
     
     @Override
-    public Kweet decode(String m) throws DecodeException {
+    public Message decode(String m) throws DecodeException {
         try{
-            return gson.fromJson(m, Kweet.class);
+            return gson.fromJson(m, Message.class);
         } catch(Throwable t){
             throw new DecodeException(m, "json decoding error", t);
         }
