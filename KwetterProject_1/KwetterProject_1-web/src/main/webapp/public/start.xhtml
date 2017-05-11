@@ -5,7 +5,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">  
-      <script src="echo.js"></script>    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="echo.js"></script>
+    
 
     <h:head>
         <b:navBar brand="Kwetter" brandHref="#" fixed="top" inverse="true">
@@ -35,58 +37,56 @@
             <b:row>
                 <b:column col-md="6">
                     <h:form >
-                        <b:inputTextarea placeholder="What's happening" value="#{LoggedUserBean.message}">
+                        <b:inputTextarea id="inputkweet" placeholder="What's happening" value="#{LoggedUserBean.message}">
                         </b:inputTextarea>
-                        <h:commandButton value="Submit" action="#{LoggedUserBean.createKweet()}">
-                            <h:commandButton value="Send" action="doSend(#{LoggedUserBean.createdKweet});"/>
-
+                        <h:commandButton value="Submit" action='#{LoggedUserBean.createKweet()}' onclick='doSend("socketsareawesome")'>
                             <f:ajax execute="@form" render ="timelinekweets" />
-                    </h:commandButton>
-                </h:form>
-            </b:column>
-            <b:column col-md="6">
-                <b:panelGrid colSpans="3,9">
-                    <h:outputText value="Your kweets:" />
-                    <h:outputText value="#{LoggedUserBean.getKweetscount()}" />
-                    <h:outputText value="following:" />
-                    <h:outputText value="#{LoggedUserBean.getFollowingcount()}"/>
-                    <h:outputText value="followers:" />
-                    <h:outputText value="#{LoggedUserBean.getFollowerscount()}"/>
-                </b:panelGrid>
-            </b:column>
-        </b:row>
-        <b:row>
-            <b:column col-md="6">
-                <h2>Kweets</h2>
-                <b:tabView activeIndex="0" > 
-                    <b:tab title="Timeline">
-                        <h:panelGroup id="timelinekweets">
-                            <b:dataTable value="#{LoggedUserBean.getTimeLineKweets()}" var="kweet" page-length="10" paginated="false">
+                        </h:commandButton>
+                    </h:form>
+                </b:column>
+                <b:column col-md="6">
+                    <b:panelGrid colSpans="3,9">
+                        <h:outputText value="Your kweets:" />
+                        <h:outputText value="#{LoggedUserBean.getKweetscount()}" />
+                        <h:outputText value="following:" />
+                        <h:outputText value="#{LoggedUserBean.getFollowingcount()}"/>
+                        <h:outputText value="followers:" />
+                        <h:outputText value="#{LoggedUserBean.getFollowerscount()}"/>
+                    </b:panelGrid>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column col-md="6">
+                    <h2>Kweets</h2>
+                    <b:tabView activeIndex="0" > 
+                        <b:tab title="Timeline">
+                            <h:panelGroup id="timelinekweets">
+                                <b:dataTable value="#{LoggedUserBean.getTimeLineKweets()}" var="kweet" page-length="10" paginated="false">
+                                    <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
+                                    <b:dataTableColumn value="#{kweet.content}" label="Kweet">
+                                        <h:outputText value="   #{kweet.posted()}"/>
+                                    </b:dataTableColumn>
+                                </b:dataTable>
+                            </h:panelGroup>
+                        </b:tab>
+                        <b:tab title="@Mentions">
+                            <b:dataTable id="mentions" value="#{LoggedUserBean.getMentions()}" var="kweet" page-length="10" paginated="false">
                                 <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
                                 <b:dataTableColumn value="#{kweet.content}" label="Kweet">
                                     <h:outputText value="   #{kweet.posted()}"/>
                                 </b:dataTableColumn>
                             </b:dataTable>
-                        </h:panelGroup>
-                    </b:tab>
-                    <b:tab title="@Mentions">
-                        <b:dataTable value="#{LoggedUserBean.getMentions()}" var="kweet" page-length="10" paginated="false">
-                            <b:dataTableColumn value="#{kweet.getOwner().getUserName()}" label="Username"/>
-                            <b:dataTableColumn value="#{kweet.content}" label="Kweet">
-                                <h:outputText value="   #{kweet.posted()}"/>
-                            </b:dataTableColumn>
-                        </b:dataTable>
-                    </b:tab>
-                </b:tabView>
-            </b:column>
-            <b:column col-md="6">
-                <h2>Trends</h2>
-                <b:dataTable value="#{LoggedUserBean.getTrends()}" var="trend" page-length="10" paginated="false" searching="false">            
-                    <b:dataTableColumn value="#{trend}" label="trends"/>                  
-                </b:dataTable>
-            </b:column>
-        </b:row>
-    </b:container>
-</h:body>
-<div id="output" class="console"></div>
+                        </b:tab>
+                    </b:tabView>
+                </b:column>
+                <b:column col-md="6">
+                    <h2>Trends</h2>
+                    <b:dataTable value="#{LoggedUserBean.getTrends()}" var="trend" page-length="10" paginated="false" searching="false">            
+                        <b:dataTableColumn value="#{trend}" label="trends"/>                  
+                    </b:dataTable>
+                </b:column>
+            </b:row>
+        </b:container>
+    </h:body>
+    <div id="output" class="console"></div>
 </html>
