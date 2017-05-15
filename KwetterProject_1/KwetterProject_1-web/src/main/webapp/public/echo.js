@@ -1,12 +1,12 @@
 //output for logging
-var output=null;
+var output = null;
 //WebSocket placeholder
-var websocket=null;
+var websocket = null;
 
 function getWsUri() {
     var wsUriSuffix = "echo-socket";
     var uri = document.URL.replace("http", "ws").replace("public/start.xhtml", wsUriSuffix);
-    return uri.match(wsUriSuffix) ? uri : uri+wsUriSuffix;
+    return uri.match(wsUriSuffix) ? uri : uri + wsUriSuffix;
 }
 
 
@@ -16,22 +16,22 @@ function connect() {
     //create socket
     websocket = new WebSocket(wsURI);
     //atach event listeneres
-    websocket.onopen = function() {
-        log('blue','CONNECTED');
+    websocket.onopen = function () {
+        log('blue', 'CONNECTED');
         // doSend("WebSockets rock");
     };
-    websocket.onclose = function() {
-        log('blue','DISCONNECTED');
+    websocket.onclose = function () {
+        log('blue', 'DISCONNECTED');
     };
-    websocket.onmessage = function(evt) {
+    websocket.onmessage = function (evt) {
         //convert json to javascript object
         var message = JSON.parse(evt.data);
         //write message.text to screen
         log('green', 'I: ' + message.text);
-        //refresh();
+        refresh();
     };
-    websocket.onerror = function(event) {
-        log('red','ERROR: ' + event.data);
+    websocket.onerror = function (event) {
+        log('red', 'ERROR: ' + event.data);
     };
 }
 
@@ -51,8 +51,8 @@ function log(colour, message) {
     output.innerHTML += "<span style='color: " + colour + "'>" + message + "</span><br>";
 }
 
-function clearConsole(){
-    output.innerHTML='';
+function clearConsole() {
+    output.innerHTML = '';
 }
 
 //invoke init() on load
@@ -67,7 +67,7 @@ function keyPressed(event) {
 }
 
 function refresh() {
-    $("#mentions").load(location.href + "#mentions");
+    location.reload(true);
 }
 
 
