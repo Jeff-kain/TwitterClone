@@ -15,6 +15,7 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -43,7 +44,8 @@ public class User implements Serializable {
     private String role;
     private String password;
     private String bio;
-
+    
+    @Transient
     private Link self;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -65,7 +67,6 @@ public class User implements Serializable {
 
     private PermissionsEnum permission;
 
-    @XmlTransient
     public Link getSelf() {
         return self;
     }
