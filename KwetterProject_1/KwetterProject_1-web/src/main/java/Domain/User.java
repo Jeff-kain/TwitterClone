@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
+import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -43,6 +44,8 @@ public class User implements Serializable {
     private String password;
     private String bio;
 
+    private Link self;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Kweet> kweets;
 
@@ -61,6 +64,15 @@ public class User implements Serializable {
     private List<Kweet> mentions = new ArrayList<Kweet>();
 
     private PermissionsEnum permission;
+
+    @XmlTransient
+    public Link getSelf() {
+        return self;
+    }
+
+    public void setSelf(Link self) {
+        this.self = self;
+    }
 
     @XmlTransient
     public String getPassword() {

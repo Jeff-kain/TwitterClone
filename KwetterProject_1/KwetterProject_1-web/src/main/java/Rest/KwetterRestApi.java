@@ -23,9 +23,11 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Link;
 import static javax.ws.rs.core.MediaType.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -41,13 +43,16 @@ public class KwetterRestApi {
     private KwetterService kwetterService;
     private User user;
     private User visit;
-    
+
+    @Context
+    UriInfo uriInfo;
+
     List<Kweet> timeline;
     @Context
     SecurityContext securityContext;
 
     @PostConstruct
-    public void postcontruct(){
+    public void postcontruct() {
         try {
             Principal principal = securityContext.getUserPrincipal();
             String username = principal.getName();
@@ -56,11 +61,15 @@ public class KwetterRestApi {
 
         }
     }
+
     @GET
     @Path("/users")
     //@Secured(PermissionsEnum.ADMIN)
     public Response getAllUsers() {
         final List<User> users = kwetterService.findAll();
+        for(User u : users) {
+            u.setSelf(Link.fromUri(uriInfo.getBaseUriBuilder().path(getClass()).path(getClass(),"getVisitUser").build(u.getUserName())).rel("self").type("GET").build());
+        }
         return Response.ok(users).build();
     }
 
@@ -70,9 +79,10 @@ public class KwetterRestApi {
         final List<Kweet> Kweets = kwetterService.findAllKweets();
         return Response.ok(Kweets).build();
     }
-        @GET
-        @Path("/kweets/timeline")
-        public List<Kweet> getTimeLineKweets() {
+
+    @GET
+    @Path("/kweets/timeline")
+    public List<Kweet> getTimeLineKweets() {
         timeline = new ArrayList<>();
         for (User user : kwetterService.getFollowing(user.getUserName())) {
             timeline.addAll(kwetterService.findKweetsByUser(user.getUserName()));
@@ -86,7 +96,7 @@ public class KwetterRestApi {
     @Path("/trends")
     public Response getTrends() {
         List<String> trends = new ArrayList<>();
-        timeline=getTimeLineKweets();
+        timeline = getTimeLineKweets();
         for (Kweet k : timeline) {
             if (k.getTrends() != null) {
                 for (String s : k.getTrends()) {
@@ -103,7 +113,7 @@ public class KwetterRestApi {
         final List<Kweet> Kweets = kwetterService.findRecentKweets(user.getUserName());
         return Response.ok(Kweets).build();
     }
-    
+
     @GET
     @Path("/kweets/recent/{username}")
     public Response getRecentKweetsByUser(@PathParam("username") String userName) {
@@ -124,7 +134,7 @@ public class KwetterRestApi {
         final List<User> followers = kwetterService.getFollowing(user.getUserName());
         return Response.ok(followers).build();
     }
-    
+
     @GET
     @Path("/following/{username}")
     public Response getFollowingvisit(@PathParam("username") String userName) {
@@ -184,20 +194,20 @@ public class KwetterRestApi {
         kwetterService.removeKweet(userName, kweetId);
         return Response.ok().build();
     }
-    
+
     @GET
     @Path("currentuser")
     public User getCurrentUser() {
         return user;
     }
-    
-     @GET
+
+    @GET
     @Path("visit/{username}")
     public User getVisitUser(@PathParam("username") String userName) {
         visit = kwetterService.findUser(userName);
         return visit;
     }
-    
+
 //       @Inject
 //    private JMSContext context;
 // 
