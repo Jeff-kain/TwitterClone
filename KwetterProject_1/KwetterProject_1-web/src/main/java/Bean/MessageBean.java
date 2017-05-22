@@ -21,8 +21,6 @@ import javax.jms.TextMessage;
         @ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/kwettergo"),
 })
 public class MessageBean implements MessageListener {
- 
- 
     @Override
     public void onMessage(Message message) {
  
@@ -30,7 +28,7 @@ public class MessageBean implements MessageListener {
         {
             TextMessage textMessage = (TextMessage) message;
             //Whatever je wil hier met je bericht etc.
-            System.out.println(textMessage.getText());
+            System.out.println(textMessage.getStringProperty("text"));
         }
         catch (Exception e){e.printStackTrace();}
     }

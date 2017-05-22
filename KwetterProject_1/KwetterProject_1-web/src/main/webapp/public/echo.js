@@ -28,7 +28,7 @@ function connect() {
         var message = JSON.parse(evt.data);
         //write message.text to screen
         log('green', 'I: ' + message.text);
-        refresh();
+        // refresh();
     };
     websocket.onerror = function (event) {
         log('red', 'ERROR: ' + event.data);

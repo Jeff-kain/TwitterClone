@@ -39,7 +39,7 @@
                     <h:form >
                         <b:inputTextarea id="inputkweet" placeholder="What's happening" value="#{LoggedUserBean.message}">
                         </b:inputTextarea>
-                        <h:commandButton value="Submit" action='#{LoggedUserBean.createKweet()}' onclick='doSend("socketsareawesome")'>
+                        <h:commandButton value="Submit" action='#{LoggedUserBean.createKweet()}' onclick='doSend(document.getElementById("input_j_idt20:inputkweet").value)'>
                             <f:ajax execute="@form" render ="timelinekweets" />
                         </h:commandButton>
                     </h:form>
